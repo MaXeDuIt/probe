@@ -1,0 +1,3 @@
+#Ссылка на скриншот открытого PyCharm с выполнением сценария 01_os_info.py
+
+http://joxi.ru/Vm6gkBMc3xdp82
