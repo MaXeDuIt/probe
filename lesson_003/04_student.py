@@ -10,5 +10,11 @@
 #   Студенту надо попросить ХХХ.ХХ рублей
 
 educational_grant, expenses = 10000, 12000
-
-# TODO здесь ваш код
+i = 1                                                   #Первый месяц
+parrent_money = expenses - educational_grant
+while i < 10:
+    i += 1                                              # Увеличиваем счетчик
+    expenses += expenses * 0.03                         # Увеличиваем расходы
+    money = expenses - educational_grant                # Вычисляем разницу
+    parrent_money += money                              # Суммируем промежуточный результат
+print('Студенту нужно попросить', round(parrent_money, 2), 'рублей')
