@@ -56,18 +56,21 @@ table_quantity_1 = table_item_1['quantity']
 table_quantity_2 = table_item_2['quantity']
 table_price_1 = table_item_1['price']
 table_price_2 = table_item_2['price']
-table_cost = (table_quantity_1 + table_quantity_2) * (table_price_1 + table_price_2)
+table_cost = table_quantity_1 * table_price_1 + table_quantity_2 * table_price_2
 print('Стол -', (table_quantity_1 + table_quantity_2), 'шт, стоимость', table_cost, 'руб')
 
 sofa_quantity = store[goods['Диван']][0]['quantity'] + store[goods['Диван']][1]['quantity']
-sofa_price = store[goods['Диван']][0]['price'] + store[goods['Диван']][0]['price']
-sofa_cost = sofa_quantity * sofa_price
+sofa_position_1 = store[goods['Диван']][0]['quantity'] * store[goods['Диван']][0]['price']
+sofa_position_2 = store[goods['Диван']][1]['quantity'] * store[goods['Диван']][1]['price']
+sofa_cost = sofa_position_1 + sofa_position_2
 print('Диван -', sofa_quantity, 'шт, стоимость', sofa_cost, 'руб')
 
 chair_quantity = store[goods['Стул']][0]['quantity'] + store[goods['Стул']][1]['quantity'] + store[goods['Стул']][2]['quantity']
-chair_price = store[goods['Стул']][0]['price'] + store[goods['Стул']][1]['price'] + store[goods['Стул']][2]['price']
-chair_cost = chair_quantity * chair_price
-print('Диван -', chair_quantity, 'шт, стоимость', chair_cost, 'руб')
+chair_position_1 = store[goods['Стул']][0]['quantity'] * store[goods['Стул']][0]['price']
+chair_position_2 = store[goods['Стул']][1]['quantity'] * store[goods['Стул']][1]['price']
+chair_position_3 = store[goods['Стул']][2]['quantity'] * store[goods['Стул']][2]['price']
+chair_cost = chair_position_1 + chair_position_2 + chair_position_3
+print('Стул -', chair_quantity, 'шт, стоимость', chair_cost, 'руб')
 
 ##########################################################################################
 # ВНИМАНИЕ! После того как __ВСЯ__ домашняя работа сделана и запушена на сервер,         #

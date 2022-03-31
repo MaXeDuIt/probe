@@ -46,10 +46,11 @@ store = {
 #         подсчет стоимости товара
 #     вывод на консоль количества и стоимости товара на складе
 
-# TODO здесь ваш код
-
-
-
-
-
-
+for article in goods:
+    code = store[goods[article]]            #получаем список товаров из словаря store
+    cost = 0                                #обнуляем переменную cost (стоимость)
+    quantity = 0                            #обнуляем переменную quantity (количество)
+    for stock in code:
+        cost = stock['quantity'] * stock['price'] + cost            #подсчитываем стоимость товара
+        quantity = stock['quantity'] + quantity                     #подсчитываем количество товара
+    print(article, '-', quantity, 'шт, стоимость - ', cost, 'руб')  #выводим результат на экран
