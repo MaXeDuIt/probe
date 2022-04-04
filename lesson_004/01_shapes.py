@@ -5,7 +5,33 @@ import simple_draw as sd
 # Часть 1.
 # Написать функции рисования равносторонних геометрических фигур:
 # - треугольника
+
+# def triangle(point, angle, length):
+#     v1 = sd.get_vector(start_point=point, angle=angle, length=length, width=3)
+#     v1.draw()
+#     v2 = sd.get_vector(start_point=v1.end_point, angle=angle + 120, length=length, width=3)
+#     v2.draw()
+#     v3 = sd.get_vector(start_point=v2.end_point, angle=angle - 120, length=length, width=3)
+#     v3.draw()
+#
+# point = sd.get_point(300, 300)
+# triangle(point=point, angle=0, length=100)
+
 # - квадрата
+
+# def quadrate(point, angle, length):
+#     v1 = sd.get_vector(start_point=point, angle=angle, length=length, width=3)
+#     v1.draw()
+#     v2 = sd.get_vector(start_point=v1.end_point, angle=angle + 90, length=length, width=3)
+#     v2.draw()
+#     v3 = sd.get_vector(start_point=v2.end_point, angle=angle + 180, length=length, width=3)
+#     v3.draw()
+#     v4 = sd.get_vector(start_point=v3.end_point, angle=angle + 270, length=length, width=3)
+#     v4.draw()
+#
+# point = sd.get_point(300, 300)
+# quadrate(point=point, angle=0, length=100)
+
 # - пятиугольника
 # - шестиугольника
 # Все функции должны принимать 3 параметра:
