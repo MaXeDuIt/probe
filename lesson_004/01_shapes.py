@@ -54,7 +54,7 @@ def pentagon(point, angle, length):
     v3.draw()
     v4 = sd.get_vector(start_point=v3.end_point, angle=angle + 216, length=length, width=3)
     v4.draw()
-    sd.line(start_point=v4.end_point, end_point=v1.start_point, width=3)
+    sd.line(start_point=v4.end_point, end_point=v1.start_point, width=3) #исправляем искажение с помощью линии
 
 def hexagon(point, angle, length):
     v1 = sd.get_vector(start_point=point, angle=angle, length=length, width=3)
@@ -67,7 +67,7 @@ def hexagon(point, angle, length):
     v4.draw()
     v5 = sd.get_vector(start_point=v4.end_point, angle=angle + 240, length=length, width=3)
     v5.draw()
-    sd.line(start_point=v5.end_point, end_point=v1.start_point, width=3)
+    sd.line(start_point=v5.end_point, end_point=v1.start_point, width=3) #исправляем искажение с помощью линии
 
 
 point = sd.get_point(150, 400)
