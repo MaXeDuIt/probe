@@ -5,33 +5,7 @@ import simple_draw as sd
 # Часть 1.
 # Написать функции рисования равносторонних геометрических фигур:
 # - треугольника
-
-# def triangle(point, angle, length):
-#     v1 = sd.get_vector(start_point=point, angle=angle, length=length, width=3)
-#     v1.draw()
-#     v2 = sd.get_vector(start_point=v1.end_point, angle=angle + 120, length=length, width=3)
-#     v2.draw()
-#     v3 = sd.get_vector(start_point=v2.end_point, angle=angle - 120, length=length, width=3)
-#     v3.draw()
-#
-# point = sd.get_point(300, 300)
-# triangle(point=point, angle=0, length=100)
-
 # - квадрата
-
-# def quadrate(point, angle, length):
-#     v1 = sd.get_vector(start_point=point, angle=angle, length=length, width=3)
-#     v1.draw()
-#     v2 = sd.get_vector(start_point=v1.end_point, angle=angle + 90, length=length, width=3)
-#     v2.draw()
-#     v3 = sd.get_vector(start_point=v2.end_point, angle=angle + 180, length=length, width=3)
-#     v3.draw()
-#     v4 = sd.get_vector(start_point=v3.end_point, angle=angle + 270, length=length, width=3)
-#     v4.draw()
-#
-# point = sd.get_point(300, 300)
-# quadrate(point=point, angle=0, length=100)
-
 # - пятиугольника
 # - шестиугольника
 # Все функции должны принимать 3 параметра:
@@ -53,7 +27,62 @@ import simple_draw as sd
 # sd.line()
 # Результат решения см lesson_004/results/exercise_01_shapes.jpg
 
-# TODO здесь ваш код
+def triangle(point, angle, length):
+    v1 = sd.get_vector(start_point=point, angle=angle, length=length, width=3)
+    v1.draw(color=sd.COLOR_GREEN)
+    v2 = sd.get_vector(start_point=v1.end_point, angle=angle + 120, length=length, width=3)
+    v2.draw(color=sd.COLOR_GREEN)
+    v3 = sd.get_vector(start_point=v2.end_point, angle=angle - 120, length=length, width=3)
+    v3.draw(color=sd.COLOR_GREEN)
+
+point = sd.get_point(150, 400)
+triangle(point=point, angle=45, length=100)
+
+def quadrate(point, angle, length):
+    v1 = sd.get_vector(start_point=point, angle=angle, length=length, width=3)
+    v1.draw(color=sd.COLOR_RED)
+    v2 = sd.get_vector(start_point=v1.end_point, angle=angle + 90, length=length, width=3)
+    v2.draw(color=sd.COLOR_RED)
+    v3 = sd.get_vector(start_point=v2.end_point, angle=angle + 180, length=length, width=3)
+    v3.draw(color=sd.COLOR_RED)
+    v4 = sd.get_vector(start_point=v3.end_point, angle=angle + 270, length=length, width=3)
+    v4.draw(color=sd.COLOR_RED)
+
+point = sd.get_point(400, 400)
+quadrate(point=point, angle=30, length=90)
+
+def pentagon(point, angle, length):
+    v1 = sd.get_vector(start_point=point, angle=angle, length=length, width=3)
+    v1.draw(color=sd.COLOR_ORANGE)
+    v2 = sd.get_vector(start_point=v1.end_point, angle=angle + 72, length=length, width=3)
+    v2.draw(color=sd.COLOR_ORANGE)
+    v3 = sd.get_vector(start_point=v2.end_point, angle=angle + 144, length=length, width=3)
+    v3.draw(color=sd.COLOR_ORANGE)
+    v4 = sd.get_vector(start_point=v3.end_point, angle=angle + 216, length=length, width=3)
+    v4.draw(color=sd.COLOR_ORANGE)
+    v5 = sd.get_vector(start_point=v4.end_point, angle=angle + 288, length=length, width=3)
+    v5.draw(color=sd.COLOR_ORANGE)
+
+point = sd.get_point(150, 100)
+pentagon(point=point, angle=45, length=85)
+
+def hexagon(point, angle, length):
+    v1 = sd.get_vector(start_point=point, angle=angle, length=length, width=3)
+    v1.draw(color=sd.COLOR_PURPLE)
+    v2 = sd.get_vector(start_point=v1.end_point, angle=angle + 60, length=length, width=3)
+    v2.draw(color=sd.COLOR_PURPLE)
+    v3 = sd.get_vector(start_point=v2.end_point, angle=angle + 120, length=length, width=3)
+    v3.draw(color=sd.COLOR_PURPLE)
+    v4 = sd.get_vector(start_point=v3.end_point, angle=angle + 180, length=length, width=3)
+    v4.draw(color=sd.COLOR_PURPLE)
+    v5 = sd.get_vector(start_point=v4.end_point, angle=angle + 240, length=length, width=3)
+    v5.draw(color=sd.COLOR_PURPLE)
+    v6 = sd.get_vector(start_point=v5.end_point, angle=angle + 300, length=length, width=3)
+    v6.draw(color=sd.COLOR_PURPLE)
+
+point = sd.get_point(450, 100)
+hexagon(point=point, angle=45, length=80)
+
 
 # Часть 1-бис.
 # Попробуйте прикинуть обьем работы, если нужно будет внести изменения в этот код.
