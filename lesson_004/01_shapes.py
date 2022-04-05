@@ -35,9 +35,6 @@ def triangle(point, angle, length):
     v3 = sd.get_vector(start_point=v2.end_point, angle=angle - 120, length=length, width=3)
     v3.draw()
 
-point = sd.get_point(150, 400)
-triangle(point=point, angle=45, length=100)
-
 def quadrate(point, angle, length):
     v1 = sd.get_vector(start_point=point, angle=angle, length=length, width=3)
     v1.draw()
@@ -47,9 +44,6 @@ def quadrate(point, angle, length):
     v3.draw()
     v4 = sd.get_vector(start_point=v3.end_point, angle=angle + 270, length=length, width=3)
     v4.draw()
-
-point = sd.get_point(400, 400)
-quadrate(point=point, angle=30, length=90)
 
 def pentagon(point, angle, length):
     v1 = sd.get_vector(start_point=point, angle=angle, length=length, width=3)
@@ -61,9 +55,6 @@ def pentagon(point, angle, length):
     v4 = sd.get_vector(start_point=v3.end_point, angle=angle + 216, length=length, width=3)
     v4.draw()
     sd.line(start_point=v4.end_point, end_point=v1.start_point, width=3)
-
-point = sd.get_point(150, 100)
-pentagon(point=point, angle=45, length=85)
 
 def hexagon(point, angle, length):
     v1 = sd.get_vector(start_point=point, angle=angle, length=length, width=3)
@@ -77,6 +68,16 @@ def hexagon(point, angle, length):
     v5 = sd.get_vector(start_point=v4.end_point, angle=angle + 240, length=length, width=3)
     v5.draw()
     sd.line(start_point=v5.end_point, end_point=v1.start_point, width=3)
+
+
+point = sd.get_point(150, 400)
+triangle(point=point, angle=45, length=100)
+
+point = sd.get_point(400, 400)
+quadrate(point=point, angle=30, length=90)
+
+point = sd.get_point(150, 100)
+pentagon(point=point, angle=45, length=85)
 
 point = sd.get_point(450, 100)
 hexagon(point=point, angle=45, length=80)
