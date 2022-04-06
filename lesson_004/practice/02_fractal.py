@@ -52,7 +52,7 @@ point_0 = sd.get_point(300, 5)
 # сделать функцию branch рекурсивной
 
 def branch(point, angle, length, delta):
-    if length < 1:
+    if length < 10:
         return
     v1 = sd.get_vector(start_point=point, angle=angle, length=length, width=3)
     v1.draw()
