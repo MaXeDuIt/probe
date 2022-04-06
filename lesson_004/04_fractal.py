@@ -53,7 +53,7 @@ root_point = sd.get_point(600, 30)
 #   и параметром "длинна ветвей" в 0.75 меньшей чем длина только что нарисованной ветви
 
 # def draw_branches(point, angle, length):
-#     if length < 5:
+#     if length < 9:
 #         return
 #     v1 = sd.get_vector(start_point=point, angle=angle, length=length)
 #     v1.draw()
@@ -89,7 +89,6 @@ root_point = sd.get_point(600, 30)
 
 # можно поиграть -шрифтами- цветами и углами отклонения
 
-# TODO здесь ваш код
 
 # 4) Усложненное задание (делать по желанию)
 # - сделать рандомное отклонение угла ветвей в пределах 40% от 30-ти градусов
