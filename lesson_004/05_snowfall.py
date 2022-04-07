@@ -20,16 +20,15 @@ N = 5
 for element in range(N):
     x = sd.random_number(100, 1100)
     y = sd.random_number(400, 550)
-    element = (x, y)
-    coordinates = [element]
+    elements = (x, y)
+    coordinates = [elements]
     print(coordinates)
     for x, y in coordinates:
         length = sd.random_number(10, 100)
         sd.start_drawing()
         point = sd.get_point(x, y)
-        sd.snowflake(center=point, length=length)
+        sd.snowflake(center=point, length=length, color=sd.COLOR_WHITE)
         while True:
-            point = sd.get_point(x, y)
             sd.snowflake(center=point, length=length, color=sd.background_color)
             y -= 20
             x += sd.random_number(-25, 25)
