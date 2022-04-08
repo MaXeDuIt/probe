@@ -21,11 +21,11 @@ for i in range(N):
     coordinates[i] = {}
     coordinates[i]['x'] = sd.random_number(0, 1200)
     coordinates[i]['y'] = 700
-    coordinates[i]['length'] = sd.random_number(5, 15)
+    coordinates[i]['length'] = sd.random_number(3, 17)
     coordinates[i]['f_a'] = sd.random_number(1, 8)/10
-    coordinates[i]['f_b'] = sd.random_number(1, 8)/10
-    coordinates[i]['f_c'] = sd.random_number(30, 60)
-    coordinates[i]['wind'] = sd.random_number(5, 15)
+    coordinates[i]['f_b'] = sd.random_number(1, 7)/10
+    coordinates[i]['f_c'] = sd.random_number(35, 65)
+    coordinates[i]['wind'] = sd.random_number(3, 17)
 # Создаю словарь со списком координат x, y, length, factor_a, factor_b, factor_c
 
 while True:
