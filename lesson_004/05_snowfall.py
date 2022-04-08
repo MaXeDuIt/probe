@@ -26,26 +26,26 @@ for i in range(N):
     coordinates[i]['f_b'] = sd.random_number(1, 8)/10
     coordinates[i]['f_c'] = sd.random_number(30, 60)
     coordinates[i]['wind'] = sd.random_number(5, 15)
-    print(coordinates)
+# Создаю словарь со списком координат x, y, length, factor_a, factor_b, factor_c
 
 while True:
-    sd.start_drawing()
+    sd.start_drawing()              # начинаем рисование без очистки экрана
     for i, coordinates_item in coordinates.items():
         point = sd.get_point(coordinates_item['x'], coordinates_item['y'])
         sd.snowflake(center=point, length=coordinates_item['length'], color=sd.background_color,
                      factor_a=coordinates_item['f_a'], factor_b=coordinates_item['f_b'],
-                     factor_c=coordinates_item['f_c'])
+                     factor_c=coordinates_item['f_c'])             # рисуем снежинку цветом backround
         coordinates_item['y'] -= coordinates_item['wind']
-        coordinates_item['x'] += sd.random_number(-15, 15)
-        point = sd.get_point(coordinates_item['x'], coordinates_item['y'])
-        sd.snowflake(center=point, length=coordinates_item['length'], color=sd.COLOR_WHITE,
-                     factor_a=coordinates_item['f_a'], factor_b=coordinates_item['f_b'],
+        coordinates_item['x'] += sd.random_number(-15, 15)         # меняем координаты x, y (смещение снежинки)
+        point = sd.get_point(coordinates_item['x'], coordinates_item['y']) # получаем новую точку рисования
+        sd.snowflake(center=point, length=coordinates_item['length'], color=sd.COLOR_WHITE,     # рисуем новую снежинку
+                     factor_a=coordinates_item['f_a'], factor_b=coordinates_item['f_b'],        # белым цветом
                      factor_c=coordinates_item['f_c'])
         if coordinates_item['y'] < 10:
             sd.snowflake(center=point, length=coordinates_item['length'], color=sd.COLOR_WHITE,
                          factor_a=coordinates_item['f_a'], factor_b=coordinates_item['f_b'],
                          factor_c=coordinates_item['f_c'])
-            coordinates_item['y'] = 700
+            coordinates_item['y'] = 700                            # запускаем бесконечность падения снежинок
     sd.finish_drawing()
     sd.sleep(0.1)
     if sd.user_want_exit():
