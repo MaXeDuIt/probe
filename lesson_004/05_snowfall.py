@@ -8,7 +8,7 @@ sd.resolution = (1200, 600)
 # - нарисовать падение этих N снежинок
 # - создать список рандомных длинн лучей снежинок (от 10 до 100) и пусть все снежинки будут разные
 
-N = 5
+N = 100
 
 # Пригодятся функции
 # sd.get_point()
@@ -16,43 +16,42 @@ N = 5
 # sd.sleep()
 # sd.random_number()
 # sd.user_want_exit()
-
-for element in range(N):
-    x = sd.random_number(100, 1100)
-    y = sd.random_number(400, 550)
-    elements = (x, y)
-    coordinates = [elements]
+coordinates = {}
+for i in range(N):
+    coordinates[i] = {}
+    coordinates[i]['x'] = sd.random_number(0, 1200)
+    coordinates[i]['y'] = 700
+    coordinates[i]['length'] = sd.random_number(5, 15)
+    coordinates[i]['f_a'] = sd.random_number(1, 8)/10
+    coordinates[i]['f_b'] = sd.random_number(1, 8)/10
+    coordinates[i]['f_c'] = sd.random_number(30, 60)
+    coordinates[i]['wind'] = sd.random_number(5, 15)
     print(coordinates)
-    for x, y in coordinates:
-        length = sd.random_number(10, 100)
-        sd.start_drawing()
-        point = sd.get_point(x, y)
-        sd.snowflake(center=point, length=length, color=sd.COLOR_WHITE)
-        while True:
-            sd.snowflake(center=point, length=length, color=sd.background_color)
-            y -= 20
-            x += sd.random_number(-25, 25)
-            point = sd.get_point(x, y)
-            sd.snowflake(center=point, length=length, color=sd.COLOR_WHITE)
-            if y < 50:
-                break
-            sd.finish_drawing()
-            sd.sleep(0.1)
-            if sd.user_want_exit():
-                break
+
+while True:
+    sd.start_drawing()
+    for i, coordinates_item in coordinates.items():
+        point = sd.get_point(coordinates_item['x'], coordinates_item['y'])
+        sd.snowflake(center=point, length=coordinates_item['length'], color=sd.background_color,
+                     factor_a=coordinates_item['f_a'], factor_b=coordinates_item['f_b'],
+                     factor_c=coordinates_item['f_c'])
+        coordinates_item['y'] -= coordinates_item['wind']
+        coordinates_item['x'] += sd.random_number(-15, 15)
+        point = sd.get_point(coordinates_item['x'], coordinates_item['y'])
+        sd.snowflake(center=point, length=coordinates_item['length'], color=sd.COLOR_WHITE,
+                     factor_a=coordinates_item['f_a'], factor_b=coordinates_item['f_b'],
+                     factor_c=coordinates_item['f_c'])
+        if coordinates_item['y'] < 10:
+            sd.snowflake(center=point, length=coordinates_item['length'], color=sd.COLOR_WHITE,
+                         factor_a=coordinates_item['f_a'], factor_b=coordinates_item['f_b'],
+                         factor_c=coordinates_item['f_c'])
+            coordinates_item['y'] = 700
+    sd.finish_drawing()
+    sd.sleep(0.1)
+    if sd.user_want_exit():
+        break
 
 sd.pause()
-
-#             sd.clear_screen()
-#             point = sd.get_point(x, y)
-#             sd.snowflake(center=point, length=length)
-#             y -= 25
-#             if y < 50:
-#                 break
-#             x += sd.random_number(-20, 20)
-#             sd.sleep(0.1)
-#             if sd.user_want_exit():
-#                 break
 
 # подсказка! для ускорения отрисовки можно
 #  - убрать clear_screen()
