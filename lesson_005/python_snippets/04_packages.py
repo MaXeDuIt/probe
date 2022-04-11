@@ -26,9 +26,6 @@ function2()
 import package_1.subpackage.module_2
 package_1.subpackage.module_2.function2()
 
-import package_1
-package_1.subpackage.module_2.function2()
-
 from package_1.subpackage import module_2
 module_2.function2()
 
