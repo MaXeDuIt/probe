@@ -1,48 +1,52 @@
 import simple_draw as sd
 
-def base(point, side):
-    sd.square(left_bottom=point, side=side, color=sd.COLOR_DARK_YELLOW, width=1)
+sd.resolution = (1500, 600)
 
-def door(point_left, point_right):
-    sd.rectangle(left_bottom=point_left, right_top=point_right, color=sd.COLOR_ORANGE, width=1)
+def base(point, side):
+    sd.square(left_bottom=point, side=side, color=sd.COLOR_DARK_YELLOW, width=3)
 
 def roof(point):
-    v1 = sd.get_vector(start_point=point, angle=0, length=200, width=2)
-    v1.draw()
-    v2 = sd.get_vector(start_point=v1.end_point, angle=135, length=150, width=2)
-    v2.draw()
-    v3 = sd.get_vector(start_point=v2.end_point, angle=225, length=150, width=2)
-    v3.draw()
+    v1 = sd.get_vector(start_point=point, angle=0, length=400, width=3)
+    v1.draw(color=sd.COLOR_DARK_YELLOW)
+    v2 = sd.get_vector(start_point=v1.start_point, angle=45, length=282, width=3)
+    v2.draw(color=sd.COLOR_DARK_YELLOW)
+    v3 = sd.get_vector(start_point=v1.end_point, angle=135, length=282, width=3)
+    v3.draw(color=sd.COLOR_DARK_YELLOW)
+
+def door(point_left, point_right):
+    sd.rectangle(left_bottom=point_left, right_top=point_right, color=sd.COLOR_DARK_ORANGE, width=1)
 
 def pipe(x, y):
     start_point = sd.get_point(x, y)
     end_point = sd.get_point(x, y+50)
-    sd.line(start_point=start_point, end_point=end_point, width=1)
+    sd.line(start_point=start_point, end_point=end_point, color=sd.COLOR_DARK_ORANGE, width=1)
     start_point = end_point
     end_point = sd.get_point(x+50, y+50)
-    sd.line(start_point=start_point, end_point=end_point, width=1)
+    sd.line(start_point=start_point, end_point=end_point, color=sd.COLOR_DARK_ORANGE, width=1)
     start_point = sd.get_point(x+50, y+50)
-    end_point = sd.get_point(x+50, y-100)
-    sd.line(start_point=start_point, end_point=end_point, width=1)
+    end_point = sd.get_point(x+50, y-50)
+    sd.line(start_point=start_point, end_point=end_point, color=sd.COLOR_DARK_ORANGE, width=1)
 
 def window(point, radius):
-    sd.circle(center_position=point, radius=radius, width=2)
+    sd.circle(center_position=point, radius=radius, color=sd.COLOR_DARK_PURPLE, width=1)
 
 def grid(x, y):
     start_point = sd.get_point(x, y)
     end_point = sd.get_point(x+100, y)
-    sd.line(start_point=start_point, end_point=end_point, width=1)
+    sd.line(start_point=start_point, end_point=end_point, color=sd.COLOR_DARK_PURPLE, width=1)
     start_point = sd.get_point(x+50, y+50)
     end_point = sd.get_point(x+50, y-50)
-    sd.line(start_point=start_point, end_point=end_point, width=1)
+    sd.line(start_point=start_point, end_point=end_point, color=sd.COLOR_DARK_PURPLE, width=1)
 
-base(sd.get_point(250, 250), 300)
-door(sd.get_point(100, 100), sd.get_point(200, 200))
-roof(sd.get_point(200, 300))
-window(sd.get_point(300, 300), 50)
-pipe(150, 500)
-grid(450, 500)
+def house():
+    base(sd.get_point(400, 25), 300)
+    roof(sd.get_point(350, 325))
+    door(sd.get_point(550, 25), sd.get_point(650, 225))
+    window(sd.get_point(625, 125), 7)
+    pipe(650, 425)
+    window(sd.get_point(550, 400), 50)
+    grid(500, 400)
 
-
+house()
 
 sd.pause()

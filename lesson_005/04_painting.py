@@ -23,7 +23,12 @@
 # Пусть слева идет снегопад, радуга переливается цветами, смайлик моргает, солнце крутит лучами, етс.
 # Задержку в анимировании все равно надо ставить, пусть даже 0.01 сек - так библиотека устойчивей работает.
 
-from morning_in_the_village import house
+import simple_draw as sd
+from morning_in_the_village.house import house
+
+sd.resolution = (1500, 600)
+
+house()
 
 
 
@@ -31,4 +36,4 @@ from morning_in_the_village import house
 
 
 
-
+sd.pause()
