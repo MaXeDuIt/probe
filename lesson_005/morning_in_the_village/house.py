@@ -48,7 +48,7 @@ def grid(x, y):
 def house():
     base(sd.get_point(400, 25), 300)
     roof(sd.get_point(350, 325))
-    door(sd.get_point(550, 26), sd.get_point(650, 225))
+    door(sd.get_point(550, 25), sd.get_point(650, 225))
     window(sd.get_point(625, 125), 7)
     pipe(650, 425)
     window(sd.get_point(550, 400), 50)

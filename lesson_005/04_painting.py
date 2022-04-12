@@ -25,13 +25,13 @@
 
 
 import simple_draw as sd
-from morning_in_the_village import house, land
+from morning_in_the_village import house, land, wall
 
 sd.resolution = (1500, 600)
 
 house.house()
 land.land()
-
+wall.wall()
 
 
 
