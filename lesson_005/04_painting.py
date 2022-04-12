@@ -25,9 +25,11 @@
 
 import simple_draw as sd
 from morning_in_the_village.house import house
+from morning_in_the_village.land import land
 
 sd.resolution = (1500, 600)
 
+land(sd.get_point(0, 0), sd.get_point(1500, 25))
 house()
 
 
