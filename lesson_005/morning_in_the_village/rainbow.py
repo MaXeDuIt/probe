@@ -8,6 +8,7 @@ def rainbow(point, step):
     for _ in range(7):
         radius += step
         sd.circle(center_position=point, radius=radius, color=rainbow_colors[_], width=20)
+        sd.sleep(0.1)
 
 
 

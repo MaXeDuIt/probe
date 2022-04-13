@@ -29,16 +29,16 @@ from morning_in_the_village import house, land, wall, rainbow, tree, human, sun,
 
 sd.resolution = (1500, 600)
 
-house.house()
 land.land()
-wall.wall()
-rainbow.rainbow(sd.get_point(615, 0), 20)
 tree.draw_branches(point=sd.get_point(1000, 100), angle=90, length=85)
 tree.draw_branches(point=sd.get_point(1300, 75), angle=90, length=45)
 tree.draw_branches(point=sd.get_point(1300, 300), angle=90, length=35)
 tree.draw_branches(point=sd.get_point(1250, 475), angle=90, length=30)
-human.human(1100, 150)
+house.house()
+wall.wall()
 sun.sun(200, 450)
+rainbow.rainbow(sd.get_point(615, 0), 20)
+human.human(1100, 150)
 snow.snow(30)
 
 sd.pause()
