@@ -25,14 +25,14 @@
 
 
 import simple_draw as sd
-from morning_in_the_village import house, land, wall
+from morning_in_the_village import house, land, wall, rainbow
 
 sd.resolution = (1500, 600)
 
 house.house()
 land.land()
 wall.wall()
-
+rainbow.rainbow(sd.get_point(615, 0), 20)
 
 
 sd.pause()
