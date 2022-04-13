@@ -25,7 +25,7 @@
 
 
 import simple_draw as sd
-from morning_in_the_village import house, land, wall, rainbow
+from morning_in_the_village import house, land, wall, rainbow, tree
 
 sd.resolution = (1500, 600)
 
@@ -33,6 +33,9 @@ house.house()
 land.land()
 wall.wall()
 rainbow.rainbow(sd.get_point(615, 0), 20)
-
+tree.draw_branches(point=sd.get_point(1000, 100), angle=90, length=85)
+tree.draw_branches(point=sd.get_point(1300, 75), angle=90, length=45)
+tree.draw_branches(point=sd.get_point(1300, 300), angle=90, length=35)
+tree.draw_branches(point=sd.get_point(1250, 475), angle=90, length=30)
 
 sd.pause()
