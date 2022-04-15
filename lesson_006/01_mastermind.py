@@ -43,4 +43,10 @@
 # Это пример применения SOLID принципа (см https://goo.gl/GFMoaI) в архитектуре программ.
 # Точнее, в этом случае важен принцип единственной ответственности - https://goo.gl/rYb3hT
 
-# TODO здесь ваш код...
+from mastermind_engine import make_a_number, check_a_number
+
+print('Компьютер загадал четырехзначное число...')
+make_a_number()
+num = input('Введите ваш вариант: ')
+check_a_number()
+
