@@ -43,10 +43,29 @@
 # Это пример применения SOLID принципа (см https://goo.gl/GFMoaI) в архитектуре программ.
 # Точнее, в этом случае важен принцип единственной ответственности - https://goo.gl/rYb3hT
 
-from mastermind_engine import make_a_number, check_a_number
+from mastermind_engine import make_a_number, check_a_number, bulls_and_cows
+from termcolor import cprint, colored
 
-print('Компьютер загадал четырехзначное число...')
+step = 0
+
+cprint('Компьютер загадал четырехзначное число...', color='magenta')
 make_a_number()
-num = input('Введите ваш вариант: ')
-check_a_number()
+while True:
+    num = list(map(int, input(colored('Введите ваш вариант: ', color='yellow'))))
+    if len(num) > 4:
+        cprint('Вы ввели больше четырех цифр, повторите ввод', color='red')
+        continue
+    if len(num) < 4:
+        cprint('Вы ввели меньше четырех цифр, повторите ввод', color='red')
+        continue
+    if len(num) != len(set(num)):
+        cprint('Цифры должны быть разные, повторите ввод', color='red')
+        continue
+    check_a_number(num)
+    step += 1
+    cprint('> быки - {}, коровы - {}'.format(bulls_and_cows['bulls'], bulls_and_cows['cows']),color='cyan')
+    if bulls_and_cows.get('bulls') >= 4:
+        cprint('Поздравляю! Вы отгадали число! Количество попыток - {}'.format(step), color='green')
+        cprint('Хотите сыграть ещё раз?', color='cyan')
+        break
 
