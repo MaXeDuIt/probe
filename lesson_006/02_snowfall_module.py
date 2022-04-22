@@ -14,7 +14,7 @@ import simple_draw as sd
 # обращаясь ТОЛЬКО к функциям модуля snowfall
 
 from snowfall import create_snowfall, draw_snowfall, move_snowfall, number_of_snowfall, delete_snowfall, \
-    coordinates, colors
+    coordinates, colors , number_of_downsnowfall
 
 
 # создать_снежинки(N)

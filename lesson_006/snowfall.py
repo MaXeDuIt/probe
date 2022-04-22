@@ -3,6 +3,7 @@ import simple_draw as sd
 coordinates = {}
 colors = {'1': sd.COLOR_RED, '2': sd.COLOR_ORANGE, '3': sd.COLOR_YELLOW, '4': sd.COLOR_GREEN,
                '5': sd.COLOR_CYAN, '6': sd.COLOR_BLUE, '7': sd.COLOR_PURPLE}
+number_of_downsnowfall = {}
 
 def create_snowfall(N):
     global coordinates
@@ -33,11 +34,12 @@ def move_snowfall():
         coordinates[i].update({'x': coordinates[i]['x'], 'y': coordinates[i]['y']})
 
 
-
 def number_of_snowfall():
-    pass
-
-
+    global number_of_downsnowfall
+    for i in coordinates:
+        if coordinates[i]['y'] < 10:
+            number_of_downsnowfall.update(coordinates[i])
+            print(number_of_downsnowfall)
 
 
 def delete_snowfall(numbers):
