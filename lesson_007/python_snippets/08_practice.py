@@ -19,8 +19,8 @@ class Man:
         self.house = None
 
     def __str__(self):
-        return 'Я - {}, сытость {}'.format(
-            self.name, self.fullness)
+        return 'Я - {}, сытость {}, еды осталось {}, денег осталось {}'.format(
+            self.name, self.fullness, self.house.food, self.house.money)
 
     def eat(self):
         if self.house.food >= 10:
@@ -35,8 +35,8 @@ class Man:
         self.house.money += 50
         self.fullness -= 10
 
-    def watch_MTV(self):
-        cprint('{} смотрел MTV целый день'.format(self.name), color='green')
+    def play_DOTA(self):
+        cprint('{} играл в доту целый день'.format(self.name), color='green')
         self.fullness -= 10
 
     def shopping(self):
@@ -45,12 +45,12 @@ class Man:
             self.house.money -= 50
             self.house.food += 50
         else:
-            cprint('{} деньги кончились!'.format(self.name), color='red')
+            cprint('{} деньги кончились'.format(self.name), color='red')
 
-    def go_to_the_house(self, house):
+    def go_into_the_house(self, house):
         self.house = house
         self.fullness -= 10
-        cprint('{} Вьехал в дом'.format(self.name), color='cyan')
+        cprint('{} въехал в дом:::'.format(self.name), color='cyan')
 
     def act(self):
         if self.fullness <= 0:
@@ -68,39 +68,28 @@ class Man:
         elif dice == 2:
             self.eat()
         else:
-            self.watch_MTV()
-
+            self.play_DOTA()
 
 class House:
 
     def __init__(self):
-        self.food = 50
-        self.money = 0
+        self.food = 10
+        self.money = 50
 
     def __str__(self):
-        return 'В доме еды осталось {}, денег осталось {}'.format(
-            self.food, self.money)
+        return 'Я - {}, сытость {}, еды осталось {}, денег осталось {}'.format(
+            self.name, self.fullness, self.house.food, self.house.money)
 
 
-citizens = [
-    Man(name='Бивис'),
-    Man(name='Батхед'),
-    Man(name='Кенни'),
-]
+beavis = Man(name='Бивис')
+butthead = Man(name='Батхед')
 
-
-my_sweet_home = House()
-for citisen in citizens:
-    citisen.go_to_the_house(house=my_sweet_home)
-
-for day in range(1, 366):
-    print('================ день {} =================='.format(day))
-    for citisen in citizens:
-        citisen.act()
-    print('--- в конце дня ---')
-    for citisen in citizens:
-        print(citisen)
-    print(my_sweet_home)
+for day in range(1, 365):
+    print('================ день {} ================='.format(day))
+    beavis.act()
+    butthead.act()
+    print(beavis)
+    print(butthead)
 
 # Создадим двух людей, живущих в одном доме - Бивиса и Батхеда
 # Нужен класс Дом, в нем должн быть холодильник с едой и тумбочка с деньгами
