@@ -19,8 +19,7 @@ class Man:
         self.house = None
 
     def __str__(self):
-        return 'Я - {}, сытость {}, еды осталось {}, денег осталось {}'.format(
-            self.name, self.fullness, self.house.food, self.house.money)
+        return 'Я - {}, сытость {}'.format(self.name, self.fullness)
 
     def eat(self):
         if self.house.food >= 10:
@@ -35,8 +34,8 @@ class Man:
         self.house.money += 50
         self.fullness -= 10
 
-    def play_DOTA(self):
-        cprint('{} играл в доту целый день'.format(self.name), color='green')
+    def watch_MTV(self):
+        cprint('{} смотрел MTV целый день'.format(self.name), color='green')
         self.fullness -= 10
 
     def shopping(self):
@@ -50,7 +49,7 @@ class Man:
     def go_into_the_house(self, house):
         self.house = house
         self.fullness -= 10
-        cprint('{} въехал в дом:::'.format(self.name), color='cyan')
+        cprint('{} въехал в дом'.format(self.name), color='cyan')
 
     def act(self):
         if self.fullness <= 0:
@@ -68,7 +67,7 @@ class Man:
         elif dice == 2:
             self.eat()
         else:
-            self.play_DOTA()
+            self.watch_MTV()
 
 class House:
 
@@ -77,19 +76,25 @@ class House:
         self.money = 50
 
     def __str__(self):
-        return 'Я - {}, сытость {}, еды осталось {}, денег осталось {}'.format(
-            self.name, self.fullness, self.house.food, self.house.money)
+        return 'В доме еды осталось {}, денег осталось {}'.format(self.food, self.money)
 
 
 beavis = Man(name='Бивис')
 butthead = Man(name='Батхед')
 
-for day in range(1, 365):
+my_sweet_home = House()
+
+beavis.go_into_the_house(house=my_sweet_home)
+butthead.go_into_the_house(house=my_sweet_home)
+
+for day in range(1, 21):
     print('================ день {} ================='.format(day))
     beavis.act()
     butthead.act()
+    print('================= в конце дня ===============')
     print(beavis)
     print(butthead)
+    print(my_sweet_home)
 
 # Создадим двух людей, живущих в одном доме - Бивиса и Батхеда
 # Нужен класс Дом, в нем должн быть холодильник с едой и тумбочка с деньгами
