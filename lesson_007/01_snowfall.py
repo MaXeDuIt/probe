@@ -9,9 +9,34 @@ import simple_draw as sd
 
 
 class Snowflake:
-    pass
+    x = sd.random_number(100, 500)
+    y = sd.random_number(400, 500)
+    f_a = sd.random_number(1, 8)/10
+    f_b = sd.random_number(1, 7)/10
+    f_c = sd.random_number(35, 65)
 
-    # TODO здесь ваш код
+    def __init__(self):
+        self.name = 'снежинка'
+        self.coordinates = sd.get_point(Snowflake.x, Snowflake.y)
+
+    def clear_previous_picture(self):
+        print('Очищена {} по координатам {}'.format(self.name, self.coordinates))
+        sd.snowflake(center=self.coordinates, length=100, color=sd.background_color,
+                     factor_a=Snowflake.f_a, factor_b=Snowflake.f_b, factor_c=Snowflake.f_c)
+
+    def move(self):
+        Snowflake.x += sd.random_number(-10, 10)
+        Snowflake.y -= sd.random_number(5, 15)
+        self.coordinates = sd.get_point(Snowflake.x, Snowflake.y)
+        print('Изменение координат {}, {}'.format(Snowflake.x, Snowflake.y))
+
+    def draw(self):
+        print('Нарисована {} по координатам {}'.format(self.name, self.coordinates))
+        sd.snowflake(center=self.coordinates, length=100, color=sd.COLOR_WHITE,
+                     factor_a=Snowflake.f_a, factor_b=Snowflake.f_b, factor_c=Snowflake.f_c)
+
+    def can_fall(self):
+        return Snowflake.y > 15
 
 
 flake = Snowflake()
