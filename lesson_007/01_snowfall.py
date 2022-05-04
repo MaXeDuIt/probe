@@ -117,7 +117,7 @@ class Snowflake:
 
     def append_flakes(self, count):
         global count_fallen_flakes
-        for i in range(N):
+        for i in range(N + count):
             flakes_list.append(Snowflake())
         count_fallen_flakes = 0
         return count_fallen_flakes
