@@ -39,7 +39,10 @@ import simple_draw as sd
 #         sd.finish_drawing()
 #
 #     def can_fall(self):
-#         return self.y > 15
+#         if self.y > 15:
+#             return True
+#         else:
+#             return False
 #
 #
 # flake = Snowflake()
@@ -72,7 +75,7 @@ class Snowflake:
 
     def __init__(self):
         self.x = sd.random_number(100, 500)
-        self.y = sd.random_number(400, 500)
+        self.y = 700
         self.length = sd.random_number(25, 60)
         self.f_a = sd.random_number(1, 8)/10
         self.f_b = sd.random_number(1, 7)/10
@@ -98,9 +101,6 @@ class Snowflake:
                      factor_a=self.f_a, factor_b=self.f_b, factor_c=self.f_c)
         sd.finish_drawing()
 
-    def can_fall(self):
-        return self.y > 15
-
     def get_flakes(self, count):
         global flakes_list
         flakes_list = []
@@ -112,17 +112,22 @@ class Snowflake:
         global count_fallen_flakes
         if self.y < 15:
             count_fallen_flakes += 1
-        print(count_fallen_flakes)
+            flakes_list.clear()
         return count_fallen_flakes
 
     def append_flakes(self, count):
+        global count_fallen_flakes
+        for i in range(N):
+            flakes_list.append(Snowflake())
+        count_fallen_flakes = 0
+        return count_fallen_flakes
 
 
-
+N = 10
 count_fallen_flakes = 0
 flake = Snowflake()
 
-flakes = flake.get_flakes(5)
+flakes = flake.get_flakes(N)
 while True:
     for flake in flakes:
         flake.clear_previous_picture()
