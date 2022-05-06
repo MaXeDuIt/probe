@@ -19,7 +19,89 @@
 #   print(Water(), '+', Air(), '=', Water() + Air())
 #   print(Fire(), '+', Air(), '=', Fire() + Air())
 
-# TODO здесь ваш код
+
+class Water:
+
+    def __init__(self):
+        self.name = 'Вода'
+
+    def __add__(self, other):
+        pass
+
+    def __str__(self):
+        pass
+
+
+class Air:
+
+    def __init__(self):
+        self.name = 'Воздух'
+
+    def __add__(self, other):
+        pass
+
+    def __str__(self):
+        pass
+
+
+class Fire:
+
+    def __init__(self):
+        self.name = 'Огонь'
+
+    def __add__(self, other):
+        pass
+
+    def __str__(self):
+        pass
+
+
+class Earth:
+
+    def __init__(self):
+        self.name = 'Земля'
+
+    def __add__(self, other):
+        pass
+
+    def __str__(self):
+        pass
+
+
+class Storm:
+
+    def __init__(self):
+        self.name = 'Шторм'
+
+
+class Steam:
+
+    def __init__(self):
+        self.name = 'Пар'
+
+
+class Mud:
+
+    def __init__(self):
+        self.name = 'Грязь'
+
+
+class Lightning:
+
+    def __init__(self):
+        self.name = 'Молния'
+
+class Dust:
+
+    def __init__(self):
+        self.name = 'Пыль'
+
+class Lava:
+
+    def __init__(self):
+        self.name = 'Лава'
+
+
 
 # Усложненное задание (делать по желанию)
 # Добавить еще элемент в игру.
