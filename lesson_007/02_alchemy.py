@@ -28,10 +28,14 @@ class Water:
     def __add__(self, other):
         if isinstance(other, Air):
             return Storm()
-        if isinstance(other, Fire):
+        elif isinstance(other, Fire):
             return Steam()
-        if isinstance(other, Earth):
+        elif isinstance(other, Earth):
             return Mud()
+        elif isinstance(other, Tree):
+            return Sheet()
+        else:
+            return None
 
     def __str__(self):
         return self.name
@@ -44,8 +48,12 @@ class Air:
     def __add__(self, other):
         if isinstance(other, Fire):
             return Lightning()
-        if isinstance(other, Earth):
+        elif isinstance(other, Earth):
             return Dust()
+        elif isinstance(other, Tree):
+            return Timber()
+        else:
+            return None
 
     def __str__(self):
         return self.name
@@ -58,6 +66,10 @@ class Fire:
     def __add__(self, other):
         if isinstance(other, Earth):
             return Lava()
+        elif isinstance(other, Tree):
+            return Coal()
+        else:
+            return None
 
     def __str__(self):
         return self.name
@@ -68,7 +80,10 @@ class Earth:
         self.name = 'Земля'
 
     def __add__(self, other):
-        pass
+        if isinstance(other, Tree):
+            return Forest()
+        else:
+            return None
 
     def __str__(self):
         return self.name
@@ -133,3 +148,49 @@ print(Fire(), '+', Earth(), '=', Fire() + Earth())
 # Усложненное задание (делать по желанию)
 # Добавить еще элемент в игру.
 # Придумать что будет при сложении существующих элементов с новым.
+
+
+class Tree:
+
+    def __init__(self):
+        self.name = 'Дерево'
+
+    def __str__(self):
+        return self.name
+
+class Sheet:
+
+    def __init__(self):
+        self.name = 'Лист'
+
+    def __str__(self):
+        return self.name
+
+class Timber:
+
+    def __init__(self):
+        self.name = 'Бревно'
+
+    def __str__(self):
+        return self.name
+
+class Coal:
+
+    def __init__(self):
+        self.name = 'Уголь'
+
+    def __str__(self):
+        return self.name
+
+class Forest:
+
+    def __init__(self):
+        self.name = 'Лес'
+
+    def __str__(self):
+        return self.name
+
+print(Water(), '+', Tree(), '=', Water() + Tree())
+print(Air(), '+', Tree(), '=', Air() + Tree())
+print(Fire(), '+', Tree(), '=', Fire() + Tree())
+print(Earth(), '+', Tree(), '=', Earth() + Tree())
