@@ -26,11 +26,15 @@ class Water:
         self.name = 'Вода'
 
     def __add__(self, other):
-        pass
+        if isinstance(other, Air):
+            return Storm()
+        if isinstance(other, Fire):
+            return Steam()
+        if isinstance(other, Earth):
+            return Mud()
 
     def __str__(self):
-        pass
-
+        return self.name
 
 class Air:
 
@@ -38,11 +42,13 @@ class Air:
         self.name = 'Воздух'
 
     def __add__(self, other):
-        pass
+        if isinstance(other, Fire):
+            return Lightning()
+        if isinstance(other, Earth):
+            return Dust()
 
     def __str__(self):
-        pass
-
+        return self.name
 
 class Fire:
 
@@ -50,11 +56,11 @@ class Fire:
         self.name = 'Огонь'
 
     def __add__(self, other):
-        pass
+        if isinstance(other, Earth):
+            return Lava()
 
     def __str__(self):
-        pass
-
+        return self.name
 
 class Earth:
 
@@ -65,42 +71,63 @@ class Earth:
         pass
 
     def __str__(self):
-        pass
-
+        return self.name
 
 class Storm:
 
     def __init__(self):
         self.name = 'Шторм'
 
+    def __str__(self):
+        return self.name
 
 class Steam:
 
     def __init__(self):
         self.name = 'Пар'
 
+    def __str__(self):
+        return self.name
 
 class Mud:
 
     def __init__(self):
         self.name = 'Грязь'
 
+    def __str__(self):
+        return self.name
 
 class Lightning:
 
     def __init__(self):
         self.name = 'Молния'
 
+    def __str__(self):
+        return self.name
+
 class Dust:
 
     def __init__(self):
         self.name = 'Пыль'
+
+    def __str__(self):
+        return self.name
 
 class Lava:
 
     def __init__(self):
         self.name = 'Лава'
 
+    def __str__(self):
+        return self.name
+
+
+print(Water(), '+', Air(), '=', Water() + Air())
+print(Water(), '+', Fire(), '=', Water() + Fire())
+print(Water(), '+', Earth(), '=', Water() + Earth())
+print(Air(), '+', Fire(), '=', Air() + Fire())
+print(Air(), '+', Earth(), '=', Air() + Earth())
+print(Fire(), '+', Earth(), '=', Fire() + Earth())
 
 
 # Усложненное задание (делать по желанию)
