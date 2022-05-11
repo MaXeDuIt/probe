@@ -72,11 +72,19 @@ class Man:
 class House:
 
     def __init__(self):
+        self.name = 'Квартира'
+
+    def refrigerator(self):
         self.food = 10
+
+    def locker(self):
         self.money = 50
 
     def __str__(self):
-        return 'В доме еды осталось {}, денег осталось {}'.format(self.food, self.money)
+        return 'В доме {}, в холодильнике осталось еды {}, в тумбочке денег осталось {}'.format(
+            self.name, self.food, self.money)
+
+
 
 citizens = [
     Man(name='Бивис'),
@@ -85,6 +93,8 @@ citizens = [
 ]
 
 my_sweet_home = House()
+my_sweet_home.refrigerator()
+my_sweet_home.locker()
 for citizen in citizens:
     citizen.go_into_the_house(house=my_sweet_home)
 
