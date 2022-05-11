@@ -82,14 +82,64 @@ class Man:
             self.read_book()
 
 
+class Cat:
 
-maxim = Man('Максим')
-for day in range(1, 366):
+    def __init__(self, name):
+        self.name = name
+        self.fullness_for_cat = 50
+        self.food_for_cat = 20
+        self.dirt = 0
+
+    def __str__(self):
+        return 'Я кот {}, сытость {}, еда {}'.format(
+            self.name, self.fullness_for_cat, self.food_for_cat)
+
+    def eat(self):
+        if self.food_for_cat >= 10:
+            cprint('{} поел'.format(self.name), color='green')
+            self.fullness_for_cat += 20
+            self.food_for_cat -= 10
+        else:
+            cprint('Нужно отправить хозяина за кормом, а пока подеру-ка я обои', color='red')
+            self.fullness_for_cat -= 10
+            self.dirt += 10
+
+    def sleap(self):
+        cprint('{} спал весь день'.format(self.name), color='yellow')
+        self.fullness_for_cat -= 10
+
+    def tears_the_wallpaper(self):
+        cprint('{} подрал обои'.format(self.name), color='blue')
+        self.fullness_for_cat -= 20
+        self.dirt += 5
+
+    def act(self):
+        if self.fullness_for_cat <= 0:
+            cprint('{} умер'.format(self.name), color='red')
+            return
+        dice = randint(1, 6)
+        if self.fullness_for_cat <= 20:
+            self.eat()
+        elif dice == 1:
+            self.eat()
+        elif dice == 2:
+            self.tears_the_wallpaper()
+        else:
+            self.sleap()
+
+
+# maxim = Man('Максим')
+# for day in range(1, 366):
+#     cprint('_______________ день {} _______________'.format(day), color='cyan')
+#     maxim.act()
+#     cprint('__________ в конце дня __________', color='grey')
+#     print(maxim)
+
+pushok = Cat('Пушок')
+for day in range(1, 21):
     cprint('_______________ день {} _______________'.format(day), color='cyan')
-    maxim.act()
-    cprint('__________ в конце дня __________', color='grey')
-    print(maxim)
-
+    pushok.act()
+    print(pushok)
 
 # Усложненное задание (делать по желанию)
 # Создать несколько (2-3) котов и подселить их в дом к человеку.
