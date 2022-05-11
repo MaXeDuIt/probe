@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from termcolor import cprint
 from random import randint
 
 # Доработать практическую часть урока lesson_007/python_snippets/08_practice.py
@@ -25,7 +26,70 @@ from random import randint
 
 # Человеку и коту надо вместе прожить 365 дней.
 
-# TODO здесь ваш код
+class Man:
+
+    def __init__(self, name):
+        self.name = name
+        self.fullness_for_man = 50
+        self.food_for_man = 20
+        self.money = 50
+
+    def __str__(self):
+        return 'Я {}, сытость {}, еда {}, деньги {}'.format(
+            self.name, self.fullness_for_man, self.food_for_man, self.money)
+
+    def go_to_work(self):
+        cprint('{} сходил на работу и заработал деньги'.format(self.name), color='blue')
+        self.money += 150
+        self.fullness_for_man -= 10
+
+    def eat(self):
+        if self.food_for_man >= 10:
+            cprint('{} поел'.format(self.name), color='green')
+            self.fullness_for_man += 30
+            self.food_for_man -= 20
+        else:
+            cprint('Еда закончилась, нужно сходить в магазин', color='red')
+
+    def shopping(self):
+        if self.money >= 50:
+            cprint('{} сходил в магазин и купил еду'.format(self.name), color='magenta')
+            self.food_for_man += 50
+            self.money -= 50
+        else:
+            cprint('Закончились деньги, нужно идти на работу', color='red')
+
+    def read_book(self):
+        cprint('{} читал книги весь день'.format(self.name), color='yellow')
+        self.fullness_for_man -= 20
+
+    def act(self):
+        if self.fullness_for_man <= 0:
+            cprint('{} умер'.format(self.name), color='red')
+            return
+        dice = randint(1, 6)
+        if self.fullness_for_man <= 20:
+            self.eat()
+        elif self.food_for_man < 10:
+            self.shopping()
+        elif self.money < 50:
+            self.go_to_work()
+        elif dice == 1:
+            self.eat()
+        elif dice == 2:
+            self.go_to_work()
+        else:
+            self.read_book()
+
+
+
+maxim = Man('Максим')
+for day in range(1, 366):
+    cprint('_______________ день {} _______________'.format(day), color='cyan')
+    maxim.act()
+    cprint('__________ в конце дня __________', color='grey')
+    print(maxim)
+
 
 # Усложненное задание (делать по желанию)
 # Создать несколько (2-3) котов и подселить их в дом к человеку.
