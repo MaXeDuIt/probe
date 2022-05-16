@@ -22,10 +22,10 @@ class Man:
         return 'Я - {}, сытость {}'.format(self.name, self.fullness)
 
     def eat(self):
-        if self.house.food >= 10:
+        if self.house.food_cat >= 10:
             cprint('{} поел'.format(self.name), color='yellow')
             self.fullness += 10
-            self.house.food -= 10
+            self.house.food_cat -= 10
         else:
             cprint('{} нет еды'.format(self.name), color='red')
 
@@ -42,7 +42,7 @@ class Man:
         if self.house.money >= 50:
             cprint('{} сходил в магазин за едой'.format(self.name), color='magenta')
             self.house.money -= 50
-            self.house.food += 50
+            self.house.food_cat += 50
         else:
             cprint('{} деньги кончились'.format(self.name), color='red')
 
@@ -58,7 +58,7 @@ class Man:
         dice = randint(1, 6)
         if self.fullness < 20:
             self.eat()
-        elif self.house.food < 10:
+        elif self.house.food_cat < 10:
             self.shopping()
         elif self.house.money < 50:
             self.work()
