@@ -43,12 +43,12 @@ class Cat:
         cprint('{} въехал в дом'.format(self.name), color='cyan')
 
     def eat(self):
-        if self.house.food_cat >= 10:
+        if self.house.food_cat >= 30:
             cprint('{} поел'.format(self.name), color='green')
             self.fullness_cat += 20
             self.house.food_cat -= 10
         else:
-            cprint('Нужно отправить хозяина за кормом, а пока подеру-ка я обои', color='red')
+            cprint('Нужно отправить хозяина за кормом, а пока подеру-ка я обои', color='blue')
             self.fullness_cat -= 10
             self.house.dirt += 5
             Man.shopping(self.man)
@@ -66,8 +66,6 @@ class Cat:
         if self.fullness_cat <= 0:
             cprint('{} умер'.format(self.name), color='red')
             return
-        if house.dirt >= 100:
-            Man.clean_up_the_house(self.man)
         dice = randint(1, 6)
         if self.fullness_cat <= 20:
             self.eat()
@@ -116,7 +114,7 @@ class Man:
             self.fullness_man += 20
             self.house.food_man -= 10
         else:
-            cprint('Нужно сходить за едой в магазин', color='red')
+            cprint('Нужно сходить за едой в магазин', color='magenta')
             self.shopping()
 
     def work(self):
@@ -130,10 +128,10 @@ class Man:
             cprint('{} сходил в магазин'.format(self.name), color='magenta')
             self.money -= 50
             self.house.food_cat += 50
-            self.house.food_man += 50
+            self.house.food_man += 30
 
     def practice_python(self):
-        cprint('{} изучал питон весь день'.format(self.name), color='magenta')
+        cprint('{} изучал питон весь день'.format(self.name), color='yellow')
         self.fullness_man -= 10
 
     def clean_up_the_house(self):
@@ -163,26 +161,34 @@ class Man:
         else:
             self.practice_python()
 
+cats = [
+    Cat('Пушок'),
+    Cat('Васька'),
+    Cat('Борис')
+]
 
-cat = Cat('Пушок')
 house = House('Уютный дом')
 house.dish()
 maxim = Man('Максим')
 print(maxim)
-print(cat)
+for cat in cats:
+    print(cat)
 print(house)
 maxim.go_into_the_house(house=house)
-maxim.pick_up_a_cat(cat=cat, house=house)
-cat.go_into_the_house(house=house, man=maxim)
+for cat in cats:
+    maxim.pick_up_a_cat(cat=cat, house=house)
+    cat.go_into_the_house(house=house, man=maxim)
 
 
 for day in range(1, 366):
     cprint('_______________ день {} _______________'.format(day), color='cyan')
-    cat.act()
+    for cat in cats:
+        cat.act()
     maxim.act()
     cprint('_______________ в конце дня _______________', color='cyan')
     print(maxim)
-    print(cat)
+    for cat in cats:
+        print(cat)
     print(house)
 
 
