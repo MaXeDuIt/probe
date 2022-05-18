@@ -108,8 +108,7 @@ class Wife(Man):
 # home = House()
 serge = Husband(name='Сережа')
 masha = Wife(name='Маша')
-print(serge)
-print(masha)
+
 
 # for day in range(365):
 #     cprint('================== День {} =================='.format(day), color='red')
