@@ -47,7 +47,7 @@ class Warehouse:
         self.queue_out = []
 
     def __str__(self):
-        return 'Склад {} груза {}'.format(self.name, self.content)
+        return 'Склад {}, груза {}'.format(self.name, self.content)
 
     def set_road_out(self, road):
         self.road_out = road
@@ -55,7 +55,7 @@ class Warehouse:
     def truck_arrived(self, truck):
         self.queue_in.append(truck)
         truck.place = self
-        print('{} прибыл грузовик {} '.format(self.name, truck))
+        print('{} прибыл грузовик {}'.format(self.name, truck))
 
     def get_next_truck(self):
         if self.queue_in:
@@ -64,7 +64,7 @@ class Warehouse:
 
     def truck_ready(self, truck):
         self.queue_out.append(truck)
-        print('{} грузовик готов {} '.format(self.name, truck))
+        print('{} грузовик готов {}'.format(self.name, truck))
 
     def act(self):
         while self.queue_out:
@@ -72,7 +72,7 @@ class Warehouse:
             truck.go_to(road=self.road_out)
 
 
-class Vehicle:
+class Venicle:
     fuel_rate = 0
     total_fuel = 0
 
@@ -85,7 +85,7 @@ class Vehicle:
 
     def tank_up(self):
         self.fuel += 1000
-        Vehicle.total_fuel += 1000
+        Venicle.total_fuel += 1000
         print('{} заправился'.format(self.model))
 
     def act(self):
@@ -95,7 +95,7 @@ class Vehicle:
         return True
 
 
-class Truck(Vehicle):
+class Truck(Venicle):
     fuel_rate = 50
     dead_time = 0
 
@@ -137,7 +137,7 @@ class OtherTruck(Truck):
     fuel_rate = 100
 
 
-class AutoLoader(Vehicle):
+class AutoLoader(Venicle):
     fuel_rate = 30
     dead_time = 0
 
@@ -243,7 +243,6 @@ while piter.content < TOTAL_CARGO:
     cprint(moscow, color='cyan')
     cprint(piter, color='cyan')
 
-
-cprint('Всего затрачено топлива {}'.format(Vehicle.total_fuel), color='yellow')
+cprint('Всего затрачено топлива {}'.format(Venicle.total_fuel), color='yellow')
 cprint('Общий простой грузовиков {}'.format(Truck.dead_time), color='yellow')
 cprint('Общий простой погрузчиков {}'.format(AutoLoader.dead_time), color='yellow')

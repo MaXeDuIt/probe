@@ -48,10 +48,22 @@ class House:
         pass
 
 
-class Husband:
+class Man:
 
-    def __init__(self):
-        pass
+    def __init__(self, name):
+        self.name = name
+        self.fullness = 30
+        self.happiness = 100
+
+    def __str__(self):
+        return 'Меня зовут {}, сытость - {}, степень счастья - {}'.format(
+            self.name, self.fullness, self.happiness)
+
+
+class Husband(Man):
+
+    def __init__(self, name):
+        super().__init__(name=name)
 
     def __str__(self):
         return super().__str__()
@@ -69,10 +81,10 @@ class Husband:
         pass
 
 
-class Wife:
+class Wife(Man):
 
-    def __init__(self):
-        pass
+    def __init__(self, name):
+        super().__init__(name=name)
 
     def __str__(self):
         return super().__str__()
@@ -93,17 +105,19 @@ class Wife:
         pass
 
 
-home = House()
+# home = House()
 serge = Husband(name='Сережа')
 masha = Wife(name='Маша')
+print(serge)
+print(masha)
 
-for day in range(365):
-    cprint('================== День {} =================='.format(day), color='red')
-    serge.act()
-    masha.act()
-    cprint(serge, color='cyan')
-    cprint(masha, color='cyan')
-    cprint(home, color='cyan')
+# for day in range(365):
+#     cprint('================== День {} =================='.format(day), color='red')
+#     serge.act()
+#     masha.act()
+#     cprint(serge, color='cyan')
+#     cprint(masha, color='cyan')
+#     cprint(home, color='cyan')
 
 # TODO после реализации первой части - отдать на проверку учителю
 
@@ -189,22 +203,22 @@ class Child:
 # отправить на проверку учителем.
 
 
-home = House()
-serge = Husband(name='Сережа')
-masha = Wife(name='Маша')
-kolya = Child(name='Коля')
-murzik = Cat(name='Мурзик')
-
-for day in range(365):
-    cprint('================== День {} =================='.format(day), color='red')
-    serge.act()
-    masha.act()
-    kolya.act()
-    murzik.act()
-    cprint(serge, color='cyan')
-    cprint(masha, color='cyan')
-    cprint(kolya, color='cyan')
-    cprint(murzik, color='cyan')
+# home = House()
+# serge = Husband(name='Сережа')
+# masha = Wife(name='Маша')
+# kolya = Child(name='Коля')
+# murzik = Cat(name='Мурзик')
+#
+# for day in range(365):
+#     cprint('================== День {} =================='.format(day), color='red')
+#     serge.act()
+#     masha.act()
+#     kolya.act()
+#     murzik.act()
+#     cprint(serge, color='cyan')
+#     cprint(masha, color='cyan')
+#     cprint(kolya, color='cyan')
+#     cprint(murzik, color='cyan')
 
 
 # Усложненное задание (делать по желанию)
