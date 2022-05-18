@@ -44,8 +44,17 @@ from random import randint
 
 class House:
 
-    def __init__(self):
-        pass
+    def __init__(self, name, locker='тумбочка', refrigerator='холодильник'):
+        self.name = name
+        self.locker = locker
+        self.refrigerator = refrigerator
+        self.food = 50
+        self.money = 100
+        self.dirt = 0
+
+    def __str__(self):
+        return 'Дом {}, {}: остаток денег {}, {}: остаток еды {}'.format(
+            self.name, self.locker, self.money, self.refrigerator, self.food)
 
 
 class Man:
@@ -105,7 +114,7 @@ class Wife(Man):
         pass
 
 
-# home = House()
+home = House('на Спасской')
 serge = Husband(name='Сережа')
 masha = Wife(name='Маша')
 
