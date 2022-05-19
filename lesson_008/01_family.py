@@ -66,7 +66,7 @@ class Man:
         self.house = house
 
     def __str__(self):
-        return 'Меня зовут {}, сытость - {}, степень счастья - {}'.format(
+        return 'Меня зовут {}, сытость: {}, степень счастья: {}'.format(
             self.name, self.fullness, self.happiness)
 
     def eat(self):
@@ -83,11 +83,31 @@ class Husband(Man):
         return super().__str__()
 
     def act(self):
-        pass
+        if self.fullness <= 0:
+            print('{} умер от голода...'.format(self.name))
+            return
+        if self.happiness < 10:
+            print('{} умер от скуки...'.format(self.name))
+            return
+        dice = randint(1, 6)
+        if self.fullness <= 20:
+            self.eat()
+        elif self.house.money <= 50:
+            self.work()
+        elif dice == 1:
+            self.eat()
+        elif dice == 2:
+            self.work()
+        else:
+            self.gaming()
 
     def eat(self):
-        super().eat()
-        print('{} поел'.format(self.name))
+        if self.house.food <= 30:
+            print('В доме {} мало еды'.format(self.house.name))
+            self.work()
+        else:
+            super().eat()
+            print('{} поел'.format(self.name))
 
     def work(self):
         self.house.money += 150
@@ -102,14 +122,33 @@ class Husband(Man):
 
 class Wife(Man):
 
-    def __init__(self, name, house):
+    def __init__(self, name, house, husband):
         super().__init__(name=name, house=house)
+        self.husband = husband
 
     def __str__(self):
         return super().__str__()
 
     def act(self):
-        pass
+        if self.fullness <= 0:
+            print('{} умерла от голода...'.format(self.name))
+            return
+        if self.happiness <= 10:
+            print('{} умерла от скуки...'.format(self.name))
+            return
+        dice = randint(1, 6)
+        if self.fullness <= 20:
+            self.eat()
+        elif self.house.dirt >= 100:
+            self.clean_house()
+        elif self.house.food <= 20:
+            self.shopping()
+        elif dice == 1:
+            self.eat()
+        elif dice == 2:
+            self.buy_fur_coat()
+        else:
+            self.shopping()
 
     def eat(self):
         super().eat()
@@ -122,10 +161,16 @@ class Wife(Man):
         print('{} сходила в магазин'.format(self.name))
 
     def buy_fur_coat(self):
-        self.house.money -= 350
-        self.happiness += 60
-        self.fullness -= 10
-        print('{} купила шубу'.format(self.name))
+        if self.house.money >= 350:
+            self.house.money -= 350
+            self.happiness += 60
+            self.fullness -= 10
+            print('{} купила шубу'.format(self.name))
+        else:
+            print('{} вынесла мозг мужу'.format(self.name))
+            self.happiness -= 10
+            self.husband.happiness -= 10
+            return
 
     def clean_house(self):
         self.house.dirt -= 100
@@ -135,28 +180,18 @@ class Wife(Man):
 
 home = House('на Спасской')
 serge = Husband(name='Сережа', house=home)
-masha = Wife(name='Маша', house=home)
-print(serge)
-print(masha)
-print(home)
-serge.eat()
-serge.work()
-serge.gaming()
-masha.eat()
-masha.shopping()
-masha.buy_fur_coat()
-masha.clean_house()
-print(serge)
-print(masha)
-print(home)
+masha = Wife(name='Маша', house=home, husband=serge)
+cprint(serge, color='cyan')
+cprint(masha, color='cyan')
+cprint(home, color='cyan')
 
-# for day in range(365):
-#     cprint('================== День {} =================='.format(day), color='red')
-#     serge.act()
-#     masha.act()
-#     cprint(serge, color='cyan')
-#     cprint(masha, color='cyan')
-#     cprint(home, color='cyan')
+for day in range(1, 366):
+    cprint('================== День {} =================='.format(day), color='red')
+    serge.act()
+    masha.act()
+    cprint(serge, color='cyan')
+    cprint(masha, color='cyan')
+    cprint(home, color='cyan')
 
 # TODO после реализации первой части - отдать на проверку учителю
 
