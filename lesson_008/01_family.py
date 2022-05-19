@@ -59,20 +59,26 @@ class House:
 
 class Man:
 
-    def __init__(self, name):
+    def __init__(self, name, house):
         self.name = name
         self.fullness = 30
         self.happiness = 100
+        self.house = house
 
     def __str__(self):
         return 'Меня зовут {}, сытость - {}, степень счастья - {}'.format(
             self.name, self.fullness, self.happiness)
 
+    def eat(self):
+        self.fullness += 30
+        self.house.food -= 30
+        print('{} поел'.format(self.name))
+
 
 class Husband(Man):
 
-    def __init__(self, name):
-        super().__init__(name=name)
+    def __init__(self, name, house):
+        super().__init__(name=name, house=house)
 
     def __str__(self):
         return super().__str__()
@@ -81,7 +87,7 @@ class Husband(Man):
         pass
 
     def eat(self):
-        pass
+        super().eat()
 
     def work(self):
         pass
@@ -92,8 +98,8 @@ class Husband(Man):
 
 class Wife(Man):
 
-    def __init__(self, name):
-        super().__init__(name=name)
+    def __init__(self, name, house):
+        super().__init__(name=name, house=house)
 
     def __str__(self):
         return super().__str__()
@@ -102,7 +108,7 @@ class Wife(Man):
         pass
 
     def eat(self):
-        pass
+        super().eat()
 
     def shopping(self):
         pass
@@ -115,12 +121,15 @@ class Wife(Man):
 
 
 home = House('на Спасской')
-serge = Husband(name='Сережа')
-masha = Wife(name='Маша')
+serge = Husband(name='Сережа', house=home)
+masha = Wife(name='Маша', house=home)
 print(serge)
 print(masha)
 print(home)
-
+serge.eat()
+masha.eat()
+print(serge)
+print(masha)
 # for day in range(365):
 #     cprint('================== День {} =================='.format(day), color='red')
 #     serge.act()
