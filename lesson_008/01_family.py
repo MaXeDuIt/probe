@@ -72,7 +72,6 @@ class Man:
     def eat(self):
         self.fullness += 30
         self.house.food -= 30
-        print('{} поел'.format(self.name))
 
 
 class Husband(Man):
@@ -88,12 +87,17 @@ class Husband(Man):
 
     def eat(self):
         super().eat()
+        print('{} поел'.format(self.name))
 
     def work(self):
-        pass
+        self.house.money += 150
+        self.fullness -= 10
+        print('{} сходил на работу'.format(self.name))
 
     def gaming(self):
-        pass
+        self.happiness += 20
+        self.fullness -= 10
+        print('{} играл в WoT'.format(self.name))
 
 
 class Wife(Man):
@@ -109,15 +113,24 @@ class Wife(Man):
 
     def eat(self):
         super().eat()
+        print('{} поела'.format(self.name))
 
     def shopping(self):
-        pass
+        self.house.food += 50
+        self.house.money -= 50
+        self.fullness -= 10
+        print('{} сходила в магазин'.format(self.name))
 
     def buy_fur_coat(self):
-        pass
+        self.house.money -= 350
+        self.happiness += 60
+        self.fullness -= 10
+        print('{} купила шубу'.format(self.name))
 
     def clean_house(self):
-        pass
+        self.house.dirt -= 100
+        self.fullness -= 10
+        print('{} прибралась в доме'.format(self.name))
 
 
 home = House('на Спасской')
@@ -127,9 +140,16 @@ print(serge)
 print(masha)
 print(home)
 serge.eat()
+serge.work()
+serge.gaming()
 masha.eat()
+masha.shopping()
+masha.buy_fur_coat()
+masha.clean_house()
 print(serge)
 print(masha)
+print(home)
+
 # for day in range(365):
 #     cprint('================== День {} =================='.format(day), color='red')
 #     serge.act()
