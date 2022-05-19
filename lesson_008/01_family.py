@@ -59,20 +59,25 @@ class House:
 
 class Man:
 
-    def __init__(self, name):
+    def __init__(self, name, house):
         self.name = name
         self.fullness = 30
         self.happiness = 100
+        self.house = house
 
     def __str__(self):
         return 'Меня зовут {}, сытость - {}, степень счастья - {}'.format(
             self.name, self.fullness, self.happiness)
 
+    def eat(self):
+        self.fullness += 30
+        self.house.food -= 30
+
 
 class Husband(Man):
 
-    def __init__(self, name):
-        super().__init__(name=name)
+    def __init__(self, name, house):
+        super().__init__(name=name, house=house)
 
     def __str__(self):
         return super().__str__()
@@ -81,19 +86,24 @@ class Husband(Man):
         pass
 
     def eat(self):
-        pass
+        super().eat()
+        print('{} поел'.format(self.name))
 
     def work(self):
-        pass
+        self.house.money += 150
+        self.fullness -= 10
+        print('{} сходил на работу'.format(self.name))
 
     def gaming(self):
-        pass
+        self.happiness += 20
+        self.fullness -= 10
+        print('{} играл в WoT'.format(self.name))
 
 
 class Wife(Man):
 
-    def __init__(self, name):
-        super().__init__(name=name)
+    def __init__(self, name, house):
+        super().__init__(name=name, house=house)
 
     def __str__(self):
         return super().__str__()
@@ -102,21 +112,30 @@ class Wife(Man):
         pass
 
     def eat(self):
-        pass
+        super().eat()
+        print('{} поела'.format(self.name))
 
     def shopping(self):
-        pass
+        self.house.food += 50
+        self.house.money -= 50
+        self.fullness -= 10
+        print('{} сходила в магазин'.format(self.name))
 
     def buy_fur_coat(self):
-        pass
+        self.house.money -= 350
+        self.happiness += 60
+        self.fullness -= 10
+        print('{} купила шубу'.format(self.name))
 
     def clean_house(self):
-        pass
+        self.house.dirt -= 100
+        self.fullness -= 10
+        print('{} прибралась в доме'.format(self.name))
 
 
 home = House('на Спасской')
-serge = Husband(name='Сережа')
-masha = Wife(name='Маша')
+serge = Husband(name='Сережа', house=home)
+masha = Wife(name='Маша', house=home)
 
 
 # for day in range(365):
