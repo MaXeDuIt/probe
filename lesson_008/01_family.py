@@ -53,17 +53,19 @@ class House:
         self.dirt = 0
 
     def __str__(self):
-        return 'Дом {}, {}: остаток денег {}, {}: остаток еды {}'.format(
-            self.name, self.locker, self.money, self.refrigerator, self.food)
+        return 'Дом {}, {}: остаток денег {}, {}: остаток еды {}, степень загрязненности: {}'.format(
+            self.name, self.locker, self.money, self.refrigerator, self.food, self.dirt)
 
 
 class Man:
 
-    def __init__(self, name, house):
+    def __init__(self, name):
         self.name = name
         self.fullness = 30
         self.happiness = 100
-        self.house = house
+        self.house = None
+        self.husband = None
+        self.wife = None
 
     def __str__(self):
         return 'Меня зовут {}, сытость: {}, степень счастья: {}'.format(
@@ -73,11 +75,17 @@ class Man:
         self.fullness += 30
         self.house.food -= 30
 
+    def go_to_the_house(self, husband, wife, house):
+        self.husband = husband
+        self.wife = wife
+        self.house = house
+        print('{} и {} поженились и заехали в дом {}'.format(self.husband.name, self.wife.name, self.house.name))
+
 
 class Husband(Man):
 
-    def __init__(self, name, house):
-        super().__init__(name=name, house=house)
+    def __init__(self, name):
+        super().__init__(name=name)
 
     def __str__(self):
         return super().__str__()
@@ -97,9 +105,9 @@ class Husband(Man):
         elif dice == 1:
             self.eat()
         elif dice == 2:
-            self.work()
-        else:
             self.gaming()
+        else:
+            self.work()
 
     def eat(self):
         if self.house.food <= 30:
@@ -122,9 +130,8 @@ class Husband(Man):
 
 class Wife(Man):
 
-    def __init__(self, name, house, husband):
-        super().__init__(name=name, house=house)
-        self.husband = husband
+    def __init__(self, name):
+        super().__init__(name=name)
 
     def __str__(self):
         return super().__str__()
@@ -179,13 +186,17 @@ class Wife(Man):
 
 
 home = House('на Спасской')
-serge = Husband(name='Сережа', house=home)
-masha = Wife(name='Маша', house=home, husband=serge)
+serge = Husband(name='Сережа')
+masha = Wife(name='Маша')
+serge.go_to_the_house(husband=serge, wife=masha, house=home)
+masha.go_to_the_house(husband=serge, wife=masha, house=home)
+
 cprint(serge, color='cyan')
 cprint(masha, color='cyan')
 cprint(home, color='cyan')
 
 for day in range(1, 366):
+    home.dirt += 5
     cprint('================== День {} =================='.format(day), color='red')
     serge.act()
     masha.act()
