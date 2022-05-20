@@ -274,63 +274,8 @@ class Child(Man):
         self.house = house
         cprint('Теперь в доме {} у малыша есть уютная кроватка'.format(self.house.name), color='blue')
 
-home = House('на Спасской')
-serge = Husband(name='Сережа')
-masha = Wife(name='Маша')
-kolya = Child(name='Коля')
-serge.go_to_the_house(husband=serge, wife=masha, house=home)
-masha.go_to_the_house(husband=serge, wife=masha, house=home)
-masha.got_a_baby(child=kolya)
-kolya.to_the_house(house=home)
-
     def petting_cat(self, cat):
         super().petting_cat(cat=cat)
-cprint(serge, color='cyan')
-cprint(masha, color='cyan')
-cprint(kolya, color='cyan')
-cprint(home, color='cyan')
-
-for day in range(1, 366):
-    home.dirt += 5
-    cprint('================== День {} =================='.format(day), color='red')
-    serge.act()
-    masha.act()
-    kolya.act()
-    cprint(serge, color='cyan')
-    cprint(masha, color='cyan')
-    cprint(kolya, color='cyan')
-    cprint(home, color='cyan')
-
-cprint('''По итогу за жизни год: 
-заработано денег {}
-употреблено еды {}
-приобретено шуб {}
-'''.format(serge.total_money, serge.total_food, masha.total_fur_coat), color='red')
-
-
-######################################################## Часть вторая
-#
-# После подтверждения учителем первой части надо
-# отщепить ветку develop и в ней начать добавлять котов в модель семьи
-#
-# Кот может:
-#   есть,
-#   спать,
-#   драть обои
-#
-# Люди могут:
-#   гладить кота (растет степень счастья на 5 пунктов)
-#
-# В доме добавляется:
-#   еда для кота (в начале - 30)
-#
-# У кота есть имя и степень сытости (в начале - 30)
-# Любое действие кота, кроме "есть", приводит к уменьшению степени сытости на 10 пунктов
-# Еда для кота покупается за деньги: за 10 денег 10 еды.
-# Кушает кот максимум по 10 единиц еды, степень сытости растет на 2 пункта за 1 пункт еды.
-# Степень сытости не должна падать ниже 0, иначе кот умрет от голода.
-#
-# Если кот дерет обои, то грязи становится больше на 5 пунктов
 
 
 class Cat:
@@ -391,15 +336,20 @@ class Cat:
 home = House('на Спасской')
 serge = Husband(name='Сережа')
 masha = Wife(name='Маша')
+kolya = Child(name='Коля')
 murzik = Cat(name='Мурзик')
+
 serge.go_to_the_house(husband=serge, wife=masha, house=home)
 masha.go_to_the_house(husband=serge, wife=masha, house=home)
+masha.got_a_baby(child=kolya)
+kolya.to_the_house(house=home)
 masha.pick_up_a_cat(cat=murzik, house=home)
 serge.pick_up_a_cat(cat=murzik, house=home)
 murzik.go_to_the_house(owner=serge, mistress=masha, house=home)
 
 cprint(serge, color='cyan')
 cprint(masha, color='cyan')
+cprint(kolya, color='cyan')
 cprint(murzik, color='cyan')
 cprint(home, color='cyan')
 
@@ -408,9 +358,11 @@ for day in range(1, 366):
     cprint('================== День {} =================='.format(day), color='red')
     serge.act()
     masha.act()
+    kolya.act()
     murzik.act()
     cprint(serge, color='cyan')
     cprint(masha, color='cyan')
+    cprint(kolya, color='cyan')
     cprint(murzik, color='cyan')
     cprint(home, color='cyan')
 
@@ -420,6 +372,65 @@ cprint('''По итогу за год жизни:
 употреблено еды котом {}
 приобретено шуб {}
 '''.format(serge.total_money, serge.total_food, murzik.total_food_cat, masha.total_fur_coat), color='red')
+
+
+######################################################## Часть вторая
+#
+# После подтверждения учителем первой части надо
+# отщепить ветку develop и в ней начать добавлять котов в модель семьи
+#
+# Кот может:
+#   есть,
+#   спать,
+#   драть обои
+#
+# Люди могут:
+#   гладить кота (растет степень счастья на 5 пунктов)
+#
+# В доме добавляется:
+#   еда для кота (в начале - 30)
+#
+# У кота есть имя и степень сытости (в начале - 30)
+# Любое действие кота, кроме "есть", приводит к уменьшению степени сытости на 10 пунктов
+# Еда для кота покупается за деньги: за 10 денег 10 еды.
+# Кушает кот максимум по 10 единиц еды, степень сытости растет на 2 пункта за 1 пункт еды.
+# Степень сытости не должна падать ниже 0, иначе кот умрет от голода.
+#
+# Если кот дерет обои, то грязи становится больше на 5 пунктов
+
+
+# home = House('на Спасской')
+# serge = Husband(name='Сережа')
+# masha = Wife(name='Маша')
+# murzik = Cat(name='Мурзик')
+# serge.go_to_the_house(husband=serge, wife=masha, house=home)
+# masha.go_to_the_house(husband=serge, wife=masha, house=home)
+# masha.pick_up_a_cat(cat=murzik, house=home)
+# serge.pick_up_a_cat(cat=murzik, house=home)
+# murzik.go_to_the_house(owner=serge, mistress=masha, house=home)
+#
+# cprint(serge, color='cyan')
+# cprint(masha, color='cyan')
+# cprint(murzik, color='cyan')
+# cprint(home, color='cyan')
+#
+# for day in range(1, 366):
+#     home.dirt += 5
+#     cprint('================== День {} =================='.format(day), color='red')
+#     serge.act()
+#     masha.act()
+#     murzik.act()
+#     cprint(serge, color='cyan')
+#     cprint(masha, color='cyan')
+#     cprint(murzik, color='cyan')
+#     cprint(home, color='cyan')
+#
+# cprint('''По итогу за год жизни:
+# заработано денег {}
+# употреблено еды человеком {}
+# употреблено еды котом {}
+# приобретено шуб {}
+# '''.format(serge.total_money, serge.total_food, murzik.total_food_cat, masha.total_fur_coat), color='red')
 
 
 ######################################################## Часть вторая бис
