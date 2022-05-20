@@ -58,6 +58,7 @@ class House:
 
 
 class Man:
+    total_food = 0
 
     def __init__(self, name):
         self.name = name
@@ -72,8 +73,10 @@ class Man:
             self.name, self.fullness, self.happiness)
 
     def eat(self):
-        self.fullness += 30
-        self.house.food -= 30
+        item = randint(10, 30)
+        self.fullness += item
+        self.house.food -= item
+        Man.total_food += item
 
     def go_to_the_house(self, husband, wife, house):
         self.husband = husband
@@ -83,6 +86,7 @@ class Man:
 
 
 class Husband(Man):
+    total_money = 0
 
     def __init__(self, name):
         super().__init__(name=name)
@@ -97,11 +101,15 @@ class Husband(Man):
         if self.happiness < 10:
             print('{} умер от скуки...'.format(self.name))
             return
+        if self.house.dirt >= 90:
+            self.happiness -= 10
         dice = randint(1, 6)
-        if self.fullness <= 20:
+        if self.fullness <= 30:
             self.eat()
         elif self.house.money <= 50:
             self.work()
+        elif self.happiness <= 20:
+            self.gaming()
         elif dice == 1:
             self.eat()
         elif dice == 2:
@@ -118,6 +126,7 @@ class Husband(Man):
             print('{} поел'.format(self.name))
 
     def work(self):
+        Husband.total_money += 150
         self.house.money += 150
         self.fullness -= 10
         print('{} сходил на работу'.format(self.name))
@@ -129,6 +138,7 @@ class Husband(Man):
 
 
 class Wife(Man):
+    total_fur_coat = 0
 
     def __init__(self, name):
         super().__init__(name=name)
@@ -143,8 +153,10 @@ class Wife(Man):
         if self.happiness <= 10:
             print('{} умерла от скуки...'.format(self.name))
             return
+        if self.house.dirt >= 90:
+            self.happiness -= 10
         dice = randint(1, 6)
-        if self.fullness <= 20:
+        if self.fullness <= 30:
             self.eat()
         elif self.house.dirt >= 100:
             self.clean_house()
@@ -158,12 +170,17 @@ class Wife(Man):
             self.shopping()
 
     def eat(self):
-        super().eat()
-        print('{} поела'.format(self.name))
+        if self.house.food <= 30:
+            print('В доме {} мало еды'.format(self.house.name))
+            self.shopping()
+        else:
+            super().eat()
+            print('{} поела'.format(self.name))
 
     def shopping(self):
-        self.house.food += 50
-        self.house.money -= 50
+        item = randint(10, 50)
+        self.house.food += item
+        self.house.money -= item * 2
         self.fullness -= 10
         print('{} сходила в магазин'.format(self.name))
 
@@ -173,6 +190,7 @@ class Wife(Man):
             self.happiness += 60
             self.fullness -= 10
             print('{} купила шубу'.format(self.name))
+            Wife.total_fur_coat += 1
         else:
             print('{} вынесла мозг мужу'.format(self.name))
             self.happiness -= 10
@@ -203,6 +221,12 @@ for day in range(1, 366):
     cprint(serge, color='cyan')
     cprint(masha, color='cyan')
     cprint(home, color='cyan')
+
+print('''По итогу за жизни год: 
+заработано денег {}
+употреблено еды {}
+приобретено шуб {}
+'''.format(serge.total_money, serge.total_food, masha.total_fur_coat))
 
 # TODO после реализации первой части - отдать на проверку учителю
 
