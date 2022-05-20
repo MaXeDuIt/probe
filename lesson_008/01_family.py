@@ -92,6 +92,12 @@ class Man:
         self.cat = cat
         self.house = house
 
+    def petting_cat(self, cat):
+        self.cat = cat
+        self.happiness += 5
+        self.fullness -= 10
+        cprint('{} гладит кота {} весь день'.format(self.name, self.cat.name), color='green')
+
 
 class Husband(Man):
     total_money = 0
@@ -122,6 +128,8 @@ class Husband(Man):
             self.eat()
         elif dice == 2:
             self.gaming()
+        elif dice == 3:
+            self.petting_cat(self.cat)
         else:
             self.work()
 
@@ -137,7 +145,7 @@ class Husband(Man):
         Husband.total_money += 150
         self.house.money += 150
         self.fullness -= 10
-        cprint('{} сходил на работу'.format(self.name), color='yellow')
+        cprint('{} сходил на работу'.format(self.name), color='blue')
 
     def gaming(self):
         self.happiness += 20
@@ -148,6 +156,9 @@ class Husband(Man):
         super().pick_up_a_cat(cat=cat, house=house)
         cprint('{} разрешил оставить кота. Теперь у кота есть имя {}'.format(
             self.name, self.cat.name), color='cyan')
+
+    def petting_cat(self, cat):
+        super().petting_cat(cat=cat)
 
 
 class Wife(Man):
@@ -179,6 +190,8 @@ class Wife(Man):
             self.eat()
         elif dice == 2:
             self.buy_fur_coat()
+        elif dice == 3:
+            self.petting_cat(self.cat)
         else:
             self.shopping()
 
@@ -191,10 +204,11 @@ class Wife(Man):
             cprint('{} поела'.format(self.name), color='green')
 
     def shopping(self):
-        item = randint(10, 50)
-        self.house.food += item
-        self.house.food_cat += item
-        self.house.money -= item * 2
+        item_1 = randint(10, 60)
+        item_2 = randint(10, 30)
+        self.house.food += item_1
+        self.house.food_cat += item_2
+        self.house.money -= item_1 + item_2
         self.fullness -= 10
         cprint('{} сходила в магазин'.format(self.name), color='yellow')
 
@@ -220,89 +234,9 @@ class Wife(Man):
         super().pick_up_a_cat(cat=cat, house=house)
         cprint('{} подобрала кота на улице'.format(self.name), color='cyan')
 
+    def petting_cat(self, cat):
+        super().petting_cat(cat=cat)
 
-class Cat:
-
-    def __init__(self, name):
-        self.name = name
-        self.fullness_cat = 30
-        self.house = None
-        self.man = None
-
-    def __str__(self):
-        return 'Я кот {}, сытость {}'.format(self.name, self.fullness_cat)
-
-    def act(self):
-        if self.fullness_cat <= 0:
-            cprint('{} умер'.format(self.name), color='red')
-            return
-        dice = randint(1, 6)
-        if self.fullness_cat <= 20:
-            self.eat()
-        elif dice == 1:
-            self.eat()
-        elif dice == 2:
-            self.soil()
-        else:
-            self.sleep()
-
-    def eat(self):
-        item = randint(1, 10)
-        if self.house.food_cat >= 20:
-            cprint('{} поел'.format(self.name), color='green')
-            self.fullness_cat += item * 2
-            self.house.food_cat -= item
-        else:
-            cprint('Нужно отправить хозяйку за кормом, а пока подеру-ка я обои', color='blue')
-            self.fullness_cat -= 10
-            self.house.dirt += 5
-            Wife.shopping(self.man)
-
-    def sleep(self):
-        cprint('{} спал весь день'.format(self.name), color='yellow')
-        self.fullness_cat -= 10
-
-    def soil(self):
-        cprint('{} подрал обои'.format(self.name), color='blue')
-        self.fullness_cat -= 10
-        self.house.dirt += 5
-
-    def go_to_the_house(self, owner, house):
-        self.man = owner
-        self.house = house
-        cprint('{} остался в доме'.format(self.name), color='cyan')
-
-
-home = House('на Спасской')
-serge = Husband(name='Сережа')
-masha = Wife(name='Маша')
-kuzya = Cat(name='Кузя')
-serge.go_to_the_house(husband=serge, wife=masha, house=home)
-masha.go_to_the_house(husband=serge, wife=masha, house=home)
-masha.pick_up_a_cat(cat=kuzya, house=home)
-serge.pick_up_a_cat(cat=kuzya, house=home)
-kuzya.go_to_the_house(owner=masha, house=home)
-
-cprint(serge, color='cyan')
-cprint(masha, color='cyan')
-cprint(home, color='cyan')
-
-for day in range(1, 366):
-    home.dirt += 5
-    cprint('================== День {} =================='.format(day), color='red')
-    serge.act()
-    masha.act()
-    kuzya.act()
-    cprint(serge, color='cyan')
-    cprint(masha, color='cyan')
-    cprint(kuzya, color='cyan')
-    cprint(home, color='cyan')
-
-cprint('''По итогу за год жизни: 
-заработано денег {}
-употреблено еды {}
-приобретено шуб {}
-'''.format(serge.total_money, serge.total_food, masha.total_fur_coat), color='red')
 
 ######################################################## Часть вторая
 #
@@ -329,7 +263,93 @@ cprint('''По итогу за год жизни:
 # Если кот дерет обои, то грязи становится больше на 5 пунктов
 
 
+class Cat:
+    total_food_cat = 0
 
+    def __init__(self, name):
+        self.name = name
+        self.fullness_cat = 30
+        self.house = None
+        self.man = None
+
+    def __str__(self):
+        return 'Я кот {}, сытость {}'.format(self.name, self.fullness_cat)
+
+    def act(self):
+        if self.fullness_cat <= 0:
+            cprint('{} умер'.format(self.name), color='red')
+            return
+        dice = randint(1, 6)
+        if self.fullness_cat <= 20:
+            self.eat()
+        elif dice == 1:
+            self.sleep()
+        elif dice == 2:
+            self.soil()
+        else:
+            self.eat()
+
+    def eat(self):
+        item = randint(1, 10)
+        if self.house.food_cat >= 20:
+            cprint('{} поел'.format(self.name), color='green')
+            self.fullness_cat += item * 2
+            self.house.food_cat -= item
+            Cat.total_food_cat += item
+        else:
+            cprint('Нужно отправить хозяйку за кормом, а пока подеру-ка я обои', color='blue')
+            self.fullness_cat -= 10
+            self.house.dirt += 5
+            Wife.shopping(self.man)
+
+    def sleep(self):
+        cprint('{} спал весь день'.format(self.name), color='yellow')
+        self.fullness_cat -= 10
+
+    def soil(self):
+        cprint('{} подрал обои'.format(self.name), color='blue')
+        self.fullness_cat -= 10
+        self.house.dirt += 5
+
+    def go_to_the_house(self, owner, mistress, house):
+        self.man = owner
+        self.man = mistress
+        self.house = house
+        cprint('{} остался в доме'.format(self.name), color='cyan')
+
+
+home = House('на Спасской')
+serge = Husband(name='Сережа')
+masha = Wife(name='Маша')
+murzik = Cat(name='Мурзик')
+serge.go_to_the_house(husband=serge, wife=masha, house=home)
+masha.go_to_the_house(husband=serge, wife=masha, house=home)
+masha.pick_up_a_cat(cat=murzik, house=home)
+serge.pick_up_a_cat(cat=murzik, house=home)
+murzik.go_to_the_house(owner=serge, mistress=masha, house=home)
+
+cprint(serge, color='cyan')
+cprint(masha, color='cyan')
+cprint(murzik, color='cyan')
+cprint(home, color='cyan')
+
+for day in range(1, 366):
+    home.dirt += 5
+    cprint('================== День {} =================='.format(day), color='red')
+    serge.act()
+    masha.act()
+    murzik.act()
+    cprint(serge, color='cyan')
+    cprint(masha, color='cyan')
+    cprint(murzik, color='cyan')
+    cprint(home, color='cyan')
+
+cprint('''По итогу за год жизни: 
+заработано денег {}
+употреблено еды человеком {}
+употреблено еды котом {}
+приобретено шуб {}
+'''.format(serge.total_money, serge.total_food, murzik.total_food_cat, masha.total_fur_coat), color='red')
 
 
 ######################################################## Часть вторая бис
