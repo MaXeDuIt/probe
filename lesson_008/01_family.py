@@ -82,7 +82,8 @@ class Man:
         self.husband = husband
         self.wife = wife
         self.house = house
-        print('{} и {} поженились и заехали в дом {}'.format(self.husband.name, self.wife.name, self.house.name))
+        cprint('{} и {} поженились и заехали в дом {}'.format(
+            self.husband.name, self.wife.name, self.house.name), color='blue')
 
 
 class Husband(Man):
@@ -96,10 +97,10 @@ class Husband(Man):
 
     def act(self):
         if self.fullness <= 0:
-            print('{} умер от голода...'.format(self.name))
+            cprint('{} умер от голода...'.format(self.name), color='red')
             return
         if self.happiness < 10:
-            print('{} умер от скуки...'.format(self.name))
+            cprint('{} умер от скуки...'.format(self.name), color='red')
             return
         if self.house.dirt >= 90:
             self.happiness -= 10
@@ -119,22 +120,22 @@ class Husband(Man):
 
     def eat(self):
         if self.house.food <= 30:
-            print('В доме {} мало еды'.format(self.house.name))
+            cprint('В доме {} мало еды'.format(self.house.name), color='red')
             self.work()
         else:
             super().eat()
-            print('{} поел'.format(self.name))
+            cprint('{} поел'.format(self.name), color='green')
 
     def work(self):
         Husband.total_money += 150
         self.house.money += 150
         self.fullness -= 10
-        print('{} сходил на работу'.format(self.name))
+        cprint('{} сходил на работу'.format(self.name), color='yellow')
 
     def gaming(self):
         self.happiness += 20
         self.fullness -= 10
-        print('{} играл в WoT'.format(self.name))
+        cprint('{} играл в WoT'.format(self.name), color='green')
 
 
 class Wife(Man):
@@ -148,10 +149,10 @@ class Wife(Man):
 
     def act(self):
         if self.fullness <= 0:
-            print('{} умерла от голода...'.format(self.name))
+            cprint('{} умерла от голода...'.format(self.name), color='red')
             return
         if self.happiness <= 10:
-            print('{} умерла от скуки...'.format(self.name))
+            cprint('{} умерла от скуки...'.format(self.name), color='red')
             return
         if self.house.dirt >= 90:
             self.happiness -= 10
@@ -171,28 +172,28 @@ class Wife(Man):
 
     def eat(self):
         if self.house.food <= 30:
-            print('В доме {} мало еды'.format(self.house.name))
+            cprint('В доме {} мало еды'.format(self.house.name), color='red')
             self.shopping()
         else:
             super().eat()
-            print('{} поела'.format(self.name))
+            cprint('{} поела'.format(self.name), color='green')
 
     def shopping(self):
         item = randint(10, 50)
         self.house.food += item
         self.house.money -= item * 2
         self.fullness -= 10
-        print('{} сходила в магазин'.format(self.name))
+        cprint('{} сходила в магазин'.format(self.name), color='yellow')
 
     def buy_fur_coat(self):
         if self.house.money >= 350:
             self.house.money -= 350
             self.happiness += 60
             self.fullness -= 10
-            print('{} купила шубу'.format(self.name))
+            cprint('{} купила шубу'.format(self.name), color='green')
             Wife.total_fur_coat += 1
         else:
-            print('{} вынесла мозг мужу'.format(self.name))
+            cprint('{} вынесла мозг мужу'.format(self.name), color='blue')
             self.happiness -= 10
             self.husband.happiness -= 10
             return
@@ -200,7 +201,7 @@ class Wife(Man):
     def clean_house(self):
         self.house.dirt -= 100
         self.fullness -= 10
-        print('{} прибралась в доме'.format(self.name))
+        cprint('{} прибралась в доме'.format(self.name), color='yellow')
 
 
 home = House('на Спасской')
@@ -222,11 +223,11 @@ for day in range(1, 366):
     cprint(masha, color='cyan')
     cprint(home, color='cyan')
 
-print('''По итогу за жизни год: 
+cprint('''По итогу за жизни год: 
 заработано денег {}
 употреблено еды {}
 приобретено шуб {}
-'''.format(serge.total_money, serge.total_food, masha.total_fur_coat))
+'''.format(serge.total_money, serge.total_food, masha.total_fur_coat), color='red')
 
 # TODO после реализации первой части - отдать на проверку учителю
 
