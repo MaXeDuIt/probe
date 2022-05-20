@@ -223,13 +223,11 @@ for day in range(1, 366):
     cprint(masha, color='cyan')
     cprint(home, color='cyan')
 
-cprint('''По итогу за жизни год: 
+cprint('''По итогу за год жизни: 
 заработано денег {}
 употреблено еды {}
 приобретено шуб {}
 '''.format(serge.total_money, serge.total_food, masha.total_fur_coat), color='red')
-
-# TODO после реализации первой части - отдать на проверку учителю
 
 ######################################################## Часть вторая
 #
