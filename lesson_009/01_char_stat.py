@@ -35,7 +35,8 @@ with open(file_name, 'r', encoding='cp1251') as file:
                     stat[char] += 1
                 else:
                     stat[char] = 1
-pprint(stat)
+for char, total in stat.items():
+    print(f'{char:10}   /   {total:10d}'.format(char=char, total=total))
 
 # После выполнения первого этапа нужно сделать упорядочивание статистики
 #  - по частоте по возрастанию
