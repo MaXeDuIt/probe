@@ -24,12 +24,11 @@ from pprint import pprint
 
 file_name = 'python_snippets\\voyna-i-mir.txt'
 stat = {}
+sorted_stat = {}
 total_char = 0
 
 with open(file_name, 'r', encoding='cp1251') as file:
-    file_content = file.read(10)
-    print(file_content)
-    for line in file_content:
+    for line in file:
         for char in line:
             if char.isalpha():
                 total_char += 1
@@ -37,11 +36,18 @@ with open(file_name, 'r', encoding='cp1251') as file:
                     stat[char] += 1
                 else:
                     stat[char] = 1
+
+sorted_keys = sorted(stat, key=stat.get, reverse=True)
+for char in sorted_keys:
+    sorted_stat[char] = stat[char]
+
 print(f"{'+':-<16}{'+':-<16}{'+'}")
 print(f"|{'Буква':^15}|{'Частота':^15}|")
 print(f"{'+':-<16}{'+':-<16}{'+'}")
-for char, count in stat.items():
+
+for char, count in sorted_stat.items():
     print(f'|{char:^15}|{count:^15d}|')
+
 print(f"{'+':-<16}{'+':-<16}{'+'}")
 print(f"|{'Итого':^15}|{total_char:^15}|")
 print(f"{'+':-<16}{'+':-<16}{'+'}")
