@@ -24,20 +24,27 @@ from pprint import pprint
 
 file_name = 'python_snippets\\voyna-i-mir.txt'
 stat = {}
+total_char = 0
 
 with open(file_name, 'r', encoding='cp1251') as file:
-    file_content = file.read(1000)
+    file_content = file.read(10)
     print(file_content)
     for line in file_content:
         for char in line:
             if char.isalpha():
+                total_char += 1
                 if char in stat:
                     stat[char] += 1
                 else:
                     stat[char] = 1
-for char, total in stat.items():
-    print(f'{char:10}   /   {total:10d}'.format(char=char, total=total))
-
+print(f"{'+':-<16}{'+':-<16}{'+'}")
+print(f"|{'Буква':^15}|{'Частота':^15}|")
+print(f"{'+':-<16}{'+':-<16}{'+'}")
+for char, count in stat.items():
+    print(f'|{char:^15}|{count:^15d}|')
+print(f"{'+':-<16}{'+':-<16}{'+'}")
+print(f"|{'Итого':^15}|{total_char:^15}|")
+print(f"{'+':-<16}{'+':-<16}{'+'}")
 # После выполнения первого этапа нужно сделать упорядочивание статистики
 #  - по частоте по возрастанию
 #  - по алфавиту по возрастанию
