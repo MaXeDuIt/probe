@@ -49,10 +49,11 @@ class Letter:
             for k in self.stat.keys():
                 if self.stat[k] == i:
                     self.sorted_stat[k] = self.stat[k]
-        # for char in self.sorted_keys:
-        #     self.sorted_stat[char] = self.stat[char]
 
     def sort_keys(self):
+        self.sorted_keys = sorted(self.stat.keys())
+        for char in self.sorted_keys:
+            self.sorted_stat[char] = self.stat[char]
 
 
     def printing(self):
@@ -73,8 +74,9 @@ letter = Letter(file_name='python_snippets\\voyna-i-mir.txt')
 letter.open()
 letter.collect()
 letter.closing()
-letter.sort_keys()
+letter.sort_values()
 letter.printing()
+
 
 # После выполнения первого этапа нужно сделать упорядочивание статистики
 #  - по частоте по возрастанию
