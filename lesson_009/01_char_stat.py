@@ -43,18 +43,17 @@ class Letter:
                     else:
                         self.stat[char] = 1
 
-    def sort_values(self):
-        self.sorted_values = sorted(self.stat.values(), reverse=True)
+    def sort_values(self, reverse):
+        self.sorted_values = sorted(self.stat.values(), reverse=reverse)
         for i in self.sorted_values:
             for k in self.stat.keys():
                 if self.stat[k] == i:
                     self.sorted_stat[k] = self.stat[k]
 
-    def sort_keys(self):
-        self.sorted_keys = sorted(self.stat.keys())
+    def sort_keys(self, reverse):
+        self.sorted_keys = sorted(self.stat.keys(), reverse=reverse)
         for char in self.sorted_keys:
             self.sorted_stat[char] = self.stat[char]
-
 
     def printing(self):
         print(f"{'+':-<16}{'+':-<16}{'+'}")
@@ -74,7 +73,7 @@ letter = Letter(file_name='python_snippets\\voyna-i-mir.txt')
 letter.open()
 letter.collect()
 letter.closing()
-letter.sort_values()
+letter.sort_keys(reverse=True)
 letter.printing()
 
 
