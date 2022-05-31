@@ -25,12 +25,13 @@ file_name_in = 'events.txt'
 file_name_out = '02_out.txt'
 with open(file_name_in, 'r', encoding='cp1251') as file_in:
     for line in file_in:
-        year = line[1:5]
-        month = line[6:8]
-        day = line[9:11]
-        hour = line[12:14]
-        minute = line[15:17]
-        print(year, '-', month, '-', day, hour, ':', minute)
+        if "NOK" in line:
+            year = line[1:5]
+            month = line[6:8]
+            day = line[9:11]
+            hour = line[12:14]
+            minute = line[15:17]
+            print(f"[{year}-{month}-{day} {hour}:{minute}]")
 
 
         # file_out = open(file_name_out, 'a')
