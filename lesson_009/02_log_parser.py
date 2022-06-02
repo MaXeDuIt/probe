@@ -19,24 +19,27 @@
 # Входные параметры: файл для анализа, файл результата
 # Требования к коду: он должен быть готовым к расширению функциональности. Делать сразу на классах.
 
-import time
 
 file_name_in = 'events.txt'
 file_name_out = '02_out.txt'
-with open(file_name_in, 'r', encoding='cp1251') as file_in:
-    for line in file_in:
-        if "NOK" in line:
-            year = line[1:5]
-            month = line[6:8]
-            day = line[9:11]
-            hour = line[12:14]
-            minute = line[15:17]
-            print(f"[{year}-{month}-{day} {hour}:{minute}]")
+prev_line = ''
+count = 1
+with open(file_name_in, 'r') as file_in:
+    with open(file_name_out, 'w') as file_out:
+        for line in file_in:
+            line = line[:-1]
+            if line.endswith('NOK'):
+                line = line[1:17]
+                if line == prev_line:
+                    count += 1
+                else:
+                    if prev_line:
+                        line_for_write = f"{prev_line} {count}\n"
+                        file_out.write(line_for_write)
+                        print(prev_line, count)
+                        count = 1
+                prev_line = line
 
-
-        # file_out = open(file_name_out, 'a')
-        # file_out.write(line)
-        # file_out.close()
 
 
 
