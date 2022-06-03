@@ -31,7 +31,7 @@ class Parser:
         self.line_for_write = ''
         self.count = 1
 
-    def file_open(self):
+    def open_file(self):
         self.file_in = open(self.file_name_in, 'r')
         self.file_out = open(self.file_name_out, 'w')
         return self.file_in, self.file_out
@@ -44,25 +44,36 @@ class Parser:
         self.line_for_write = f"{self.prev_line} {self.count}\n"
         self.file_out.write(self.line_for_write)
 
-    def act(self):
+    def sorting(self):
+        if self.value == 'minute':
+            self.line = self.line[1:17]
+        elif self.value == 'hour':
+            self.line = self.line[1:14]
+        elif self.value == 'day':
+            self.line = self.line[1:11]
+        elif self.value == 'month':
+            self.line = self.line[1:8]
+
+    def act(self, param, value):
+        self.param = param
+        self.value = value
         for self.line in self.file_in:
             self.line = self.line[:-1]
-            if self.line.endswith('NOK'):
-                self.line = self.line[1:17]
+            if self.line.endswith(self.param):
+                self.sorting()
                 if self.line == self.prev_line:
                     self.count += 1
                 else:
                     if self.prev_line:
-                        line_for_write = f"{self.prev_line} {self.count}\n"
-                        self.file_out.write(line_for_write)
+                        self.write_file()
                         print(self.prev_line, self.count)
                         self.count = 1
                 self.prev_line = self.line
 
 
 parser = Parser(file_name_in='events.txt', file_name_out='02_out.txt')
-parser.file_open()
-parser.act()
+parser.open_file()
+parser.act(param='NOK', value='minute')
 parser.close_file()
 
 
