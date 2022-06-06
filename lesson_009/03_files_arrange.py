@@ -58,7 +58,7 @@ class Arrange:
     def creation_dir(self, folder, subfolder):
         self.folder = folder
         self.subfolder = subfolder
-        os.makedirs(f"icons_by_year\\{self.folder}\\{self.subfolder}")
+        os.makedirs(f"icons_by_year\\{self.folder}\\{self.subfolder}", exist_ok=True)
 
 icons = Arrange('icons')
 icons.search()
