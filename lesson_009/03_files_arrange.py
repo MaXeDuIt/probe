@@ -54,16 +54,22 @@ class Arrange:
                 year = self.file_time[0]
                 month = self.file_time[1]
                 self.creation_dir(folder=year, subfolder=month)
+                self.copying(source=full_file_path, destination=f"icons_by_year\\{self.folder}\\{self.subfolder}")
 
     def creation_dir(self, folder, subfolder):
         self.folder = folder
         self.subfolder = subfolder
         os.makedirs(f"icons_by_year\\{self.folder}\\{self.subfolder}", exist_ok=True)
 
+    def copying(self, source, destination):
+        self.source = source
+        self.destination = destination
+        shutil.copy2(self.source, self.destination)
+
 icons = Arrange('icons')
 icons.search()
 
-
+shutil.copy2('icons\\animations\\process-working.png', 'icons_by_year')
 
 # zfile = zipfile.ZipFile('icons.zip', 'r')
 # for file_info in zfile.infolist():
