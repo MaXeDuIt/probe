@@ -42,16 +42,15 @@ class Arrange:
 
     def __init__(self, file_name):
         self.file_name = file_name
-        self.file_time = None
 
     def organize(self):
         for dirpath, dirnames, filenames in os.walk(self.file_name):
             for file in filenames:
                 full_file_path = os.path.join(dirpath, file)
                 secs = os.path.getmtime(full_file_path)
-                self.file_time = time.gmtime(secs)
-                year = self.file_time[0]
-                month = self.file_time[1]
+                file_time = time.gmtime(secs)
+                year = file_time[0]
+                month = file_time[1]
                 self.creation_dir(folder=year, subfolder=month)
                 folder_for_copying = f"icons_by_year\\{year}\\{month}"
                 self.copying(source=full_file_path, destination=folder_for_copying)
