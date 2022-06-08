@@ -16,7 +16,7 @@
 # кармы до уровня ENLIGHTENMENT_CARMA_LEVEL. Исключения обработать и записать в лог.
 # При создании собственных исключений максимально использовать функциональность
 # базовых встроенных исключений.
-import logging.config
+
 from random import randint, choice
 
 
@@ -48,6 +48,7 @@ ENLIGHTENMENT_CARMA_LEVEL = 777
 total_carma = 0
 event = [IamGodError, CarCrashError, DepressionError, DrunkError, GluttonyError, SuicideError]
 log = open('02_log.txt', 'w')
+days = 1
 
 def one_day():
     carma_day = randint(1, 7)
@@ -56,16 +57,19 @@ def one_day():
     if dice == 7:
         try:
             log.write(f"{day_event}\n")
+            raise day_event
         except day_event:
             print(f"Сегодня произошло событие {day_event}")
     return carma_day
 
 
 while total_carma < ENLIGHTENMENT_CARMA_LEVEL:
+    print(f"День номер {days}")
     print(total_carma)
     total_carma += one_day()
+    days += 1
 else:
-    print('Карма заполнена, выход из временной петли')
+    print(f"Карма заполнена, выход из временной петли. Дней потрачено - {days}")
     log.close()
 
 
