@@ -17,8 +17,54 @@
 # При создании собственных исключений максимально использовать функциональность
 # базовых встроенных исключений.
 
-ENLIGHTENMENT_CARMA_LEVEL = 777
+from random import randint, choice
 
-# TODO здесь ваш код
+
+class IamGodError(Exception):
+    pass
+
+
+class DrunkError(Exception):
+    pass
+
+
+class CarCrashError(Exception):
+    pass
+
+
+class GluttonyError(Exception):
+    pass
+
+
+class DepressionError(Exception):
+    pass
+
+
+class SuicideError(Exception):
+    pass
+
+
+ENLIGHTENMENT_CARMA_LEVEL = 777
+total_carma = 0
+event = [IamGodError, CarCrashError, DepressionError, DrunkError, GluttonyError, SuicideError]
+
+def one_day():
+    carma_day = randint(1, 7)
+    dice = randint(1, 13)
+    day_event = choice(event)
+    if dice == 7:
+        try:
+            raise day_event('Что...')
+        except day_event:
+            print(f"Сегодня произошло событие {day_event}")
+    return carma_day
+
+
+while total_carma < ENLIGHTENMENT_CARMA_LEVEL:
+    print(total_carma)
+    total_carma += one_day()
+else:
+    print('Карма заполнена, выход из временной петли')
+
 
 # https://goo.gl/JnsDqu
