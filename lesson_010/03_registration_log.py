@@ -23,32 +23,53 @@
 # Вызов метода обернуть в try-except.
 
 
-class CheckReg:
-
-    def __init__(self, file_name):
-        self.file_name = file_name
-        self.file_content = None
-        self.line = None
-        self.user_name = None
-        self.user_mail = None
-        self.user_age = None
-
-    def open_file(self):
-        self.file_content = open(self.file_name, 'r', encoding='utf8')
-
-    def close_file(self):
-        self.file_content.close()
-
-    def write_file(self):
-        self.file_content.write(self.line)
-
-    def split_file(self):
-        for line in self.file_content:
-            self.user_name, self.user_mail, self.user_age = line.split(' ')
-            print(f"### {self.user_name} ### {self.user_mail} ### {self.user_age}")
+class NotNameError(Exception):
+    pass
 
 
-check_reg = CheckReg('registrations.txt')
-check_reg.open_file()
-check_reg.split_file()
-check_reg.close_file()
+class NotEmailError(Exception):
+    pass
+
+
+def check_reg(line):
+    user_name, user_mail, user_age = line.split(' ')
+    symbols = ('@', '.')
+    if user_name.isalpha() is False:
+        raise NotNameError
+    elif int(user_age) not in range(10, 100):
+        raise ValueError
+    elif user_name and user_mail and user_age is False:
+        raise TypeError
+    else:
+        for char in symbols:
+            if char not in user_mail:
+                raise NotEmailError
+    return line
+
+with open('registrations.txt', 'r', encoding='utf8') as file:
+    for line in file:
+        line = line[:-1]
+        try:
+            check_reg(line)
+        except NotNameError:
+            bad = open('registrations_bad.txt', 'a', encoding='utf8')
+            bad.write(f"{line} Поле имени содержит НЕ только буквы\n")
+            bad.close()
+        except NotEmailError:
+            bad = open('registrations_bad.txt', 'a', encoding='utf8')
+            bad.write(f"{line} Поле емейл НЕ содержит @ и .(точку)\n")
+            bad.close()
+        except ValueError:
+            bad = open('registrations_bad.txt', 'a', encoding='utf8')
+            bad.write(f"{line} Поле возраст НЕ является числом от 10 до 99\n")
+            bad.close()
+        except TypeError:
+            bad = open('registrations_bad.txt', 'a', encoding='utf8')
+            bad.write(f"{line} Присутсвуют НЕ все три поля\n")
+            bad.close()
+        else:
+            good = open('registrations_good.txt', 'a', encoding='utf8')
+            good.write(f"{line}\n")
+            good.close()
+
+file.close()
