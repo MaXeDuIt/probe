@@ -13,7 +13,7 @@
 # Нужно вычислить все операции и найти сумму их результата.
 
 ops = {
-    '*': lambda x, y: x + y,
+    '*': lambda x, y: x * y,
     '/': lambda x, y: x / y,
     '+': lambda x, y: x + y,
     '-': lambda x, y: x - y,
@@ -29,7 +29,7 @@ def calc(line):
     operand_2 = int(operand_2)
     if operation in ops:
         func = ops[operation]
-        value = func(operand_1,  operand_2)
+        value = func(operand_1, operand_2)
     else:
         raise ValueError('Unknown operation {operation}')
     return value
